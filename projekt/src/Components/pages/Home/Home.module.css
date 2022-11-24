@@ -1,0 +1,17 @@
+/* ogólny */
+.home__section {
+    padding: 20px 35px;
+}
+
+.home__tablerow {
+    font-weight: 700;
+}
+
+
+/* ciemny styl */
+.MuiTableCell-root {
+    background: black;
+    color: white;
+}
+
+

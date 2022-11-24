@@ -1,0 +1,10 @@
+.main {
+    width: 100vw;
+    height: 100vh;
+    transition: 0.5s linear;
+    padding-left: 13%;
+}
+
+.main_min {
+    padding-left: 4%;
+}

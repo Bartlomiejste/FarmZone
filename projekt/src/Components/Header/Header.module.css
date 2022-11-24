@@ -1,0 +1,36 @@
+/* style do headera */
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 130px;
+    padding: 35px;
+    background-color: white;
+    font-weight: 500;
+}
+
+.header__name_navName {
+    margin-top: 5px;
+    font-size: 25px;
+    color: #4caf50;
+}
+
+.header__img {
+    width: 75%;
+    height: auto;
+}
+
+.header__switch {
+    margin:-20px;
+    align-self: flex-start;
+    
+}
+
+/* ciemny styl */
+
+.dark {
+    background: black;
+    color: white;
+}
