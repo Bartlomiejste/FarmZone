@@ -16,37 +16,28 @@ import { AppContext } from "../../../AppContext/AppContext";
 import AddMachine from "./AddMachine";
 import { supabase } from "../../../supabase/config";
 
-function createData(id, category, name, condition, damage, value) {
-  return { category, name, condition, damage, value };
-}
-
-const rows = [
-  createData(1, "Pojazd", "Ciągnik", "Używany", "Nie", "30.000"),
-  createData(2, "Maszyna", "Brony", "Używany", "Tak", "2.000"),
-  createData(3, "Maszyna", "Siewnik", "Nowy", "Nie", "10.000"),
-  createData(4, "Pojazd", "Kombajn", "Używany", "Tak", "150.000"),
-];
-
 export default function Home() {
   const { isDarkTheme } = useContext(AppContext);
-  const { namerow, setNamerow } = useState([]);
+
+  const [errors, setErrors] = useState(null);
+  const [namerow, setNamerow] = useState([]);
 
   useEffect(() => {
     getAllMachnies();
   }, []);
 
-  const getAllMachnies = async (
-    id,
-    category,
-    name,
-    condition,
-    damage,
-    price
-  ) => {
-    let { data: Machines } = await supabase.from("Machines").select("*");
-
-    console.log("machines supabase", Machines);
+  const getAllMachnies = async () => {
+    let { data: Machine, error } = await supabase.from("Machine").select("*");
+    if (error) {
+      setErrors(null);
+      console.log(error);
+    }
+    if (Machine) {
+      setNamerow(Machine);
+      setErrors(null);
+    }
   };
+
   return (
     <div className={style.home__section}>
       <AddMachine />
@@ -54,26 +45,58 @@ export default function Home() {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell className={style.home__tablerow} align="center">
+              {/* zmiana koloru nagłówków !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! - może ze zmiennymi ten kolor ?*/}
+
+              <TableCell
+                align="center"
+                style={{
+                  fontWeight: "bold",
+                  background: "#4caf4faf",
+                }}
+              >
                 Kategoria
               </TableCell>
-              <TableCell className={style.home__tablerow} align="center">
+              <TableCell
+                align="center"
+                style={{
+                  fontWeight: "bold",
+                  background: "#4caf4faf",
+                }}
+              >
                 Nazwa
               </TableCell>
-              <TableCell className={style.home__tablerow} align="center">
+              <TableCell
+                align="center"
+                style={{
+                  fontWeight: "bold",
+                  background: "#4caf4faf",
+                }}
+              >
                 Stan
               </TableCell>
-              <TableCell className={style.home__tablerow} align="center">
-                Uszkodzonie
+              <TableCell
+                align="center"
+                style={{
+                  fontWeight: "bold",
+                  background: "#4caf4faf",
+                }}
+              >
+                Uszkodzenia
               </TableCell>
-              <TableCell className={style.home__tablerow} align="center">
-                Cena&nbsp;(zl)
+              <TableCell
+                align="center"
+                style={{
+                  fontWeight: "bold",
+                  background: "#4caf4faf",
+                }}
+              >
+                Cena w zł
               </TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {rows.map((row, id) => (
+            {namerow.map((name, id) => (
               <TableRow
                 key={id}
                 sx={
@@ -86,12 +109,20 @@ export default function Home() {
                 }
               >
                 <TableCell component="th" scope="row" align="center">
-                  {row.category}
+                  {name.Category}
                 </TableCell>
-                <TableCell align="center">{row.name}</TableCell>
-                <TableCell align="center">{row.condition}</TableCell>
-                <TableCell align="center">{row.damage}</TableCell>
-                <TableCell align="center">{row.price}</TableCell>
+
+                <TableCell align="center">{name.Name}</TableCell>
+
+                <TableCell align="center">
+                  {name.Condition === "Nowy" ? "Nowy" : "Używany"}
+                </TableCell>
+
+                <TableCell align="center">
+                  {name.Damage === "Tak" ? "Tak" : "Nie"}
+                </TableCell>
+
+                <TableCell align="center">{name.Price}</TableCell>
               </TableRow>
             ))}
           </TableBody>

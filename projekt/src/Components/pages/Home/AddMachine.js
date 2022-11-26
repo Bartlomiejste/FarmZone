@@ -1,42 +1,93 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "../../../supabase/config";
 
 const AddMachine = () => {
+  const navigate = useNavigate();
+  const [Category, setCategory] = useState("");
+  const [Name, setName] = useState("");
+  const [Damage, setDamage] = useState("");
+  const [Condition, setCondition] = useState("");
+  const [Price, setPrice] = useState("");
+  const [formError, setFormError] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!Category || !Name || !Condition || !Damage || !Price) {
+      setFormError("Uzupełnij wszystkie pola");
+    }
+    const { data, error } = await supabase
+      .from("Machine")
+      .insert([{ Category, Name, Damage, Condition, Price }]);
+    if (error) {
+      console.log(error);
+      setFormError("Uzupełnij wszystkie pola");
+    }
+    if (data) {
+      console.log(data);
+      setFormError(null);
+      navigate("/main");
+    }
+  };
   return (
     <div>
-      <select name="category" defaultValue="Kategoria">
-        <option disabled value="Kategoria">
-          Kategoria
-        </option>
-        <option value="Pojazd">Pojazd</option>
-        <option value="Maszyna">Maszyna</option>
-        <option value="Inne">Inne</option>
-      </select>
+      <form onSubmit={handleSubmit}>
+        <select
+          name="category"
+          defaultValue="Kategoria"
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option disabled value="Kategoria">
+            Kategoria
+          </option>
+          <option>Pojazd</option>
+          <option>Maszyna</option>
+          <option>Inne</option>
+        </select>
 
-      <label>
-        <input type="text" name="name" autoComplete="off" placeholder="Nazwa" />
-      </label>
+        <input
+          type="text"
+          name="name"
+          placeholder="Nazwa"
+          value={Name}
+          onChange={(e) => setName(e.target.value)}
+        />
 
-      <select name="condition" defaultValue="Stan">
-        <option disabled value="Stan">
-          Stan
-        </option>
-        <option value="Nowy">Nowy</option>
-        <option value="Używany">Używany</option>
-      </select>
+        <select
+          name="condition"
+          defaultValue="Stan"
+          onChange={(e) => setCondition(e.target.value)}
+        >
+          <option disabled value="Stan">
+            Stan
+          </option>
+          <option>Nowy</option>
+          <option>Używany</option>
+        </select>
 
-      <select name="damage" defaultValue="Do naprawy">
-        <option disabled value="Do naprawy">
-          Do naprawy
-        </option>
-        <option value="Tak">Tak</option>
-        <option value="Nie">Nie</option>
-      </select>
+        <select
+          name="damage"
+          defaultValue="Uszkodzenia"
+          onChange={(e) => setDamage(e.target.value)}
+        >
+          <option disabled value="Uszkodzenia">
+            Uszkodzenia
+          </option>
+          <option>Tak</option>
+          <option>Nie</option>
+        </select>
 
-      <label>
-        <input type="text" name="price" placeholder="Cena" />
-      </label>
+        <input
+          type="number"
+          name="price"
+          placeholder="Cena w zł"
+          value={Price}
+          onChange={(e) => setPrice(e.target.value)}
+        />
 
-      <button>Dodaj urządzenie</button>
+        <button>Dodaj urządzenie</button>
+        {formError && <p>{formError}</p>}
+      </form>
     </div>
   );
 };
