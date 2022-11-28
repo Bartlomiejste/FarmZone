@@ -2,10 +2,24 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow-x: hidden;
+    font-family: Quicksand, sans-serif;
 }
 
+:root {
+    --main-bg-color:#d9e0e7;
+    --main-nav-color:#2d353c;
+    --main-green-color:#4caf50;
+    --main-darkgreen-color:#4caf4faf;
+    --darkTheme-background:#000;
+    --darkTheme-color:#ffff;
+
+    
+    background-color: var(--main-bg-color);
+}
+
+
 .dark {
-    color:white;
-    background-color: black;
+    color:var(--darkTheme-color);
+    background:var(--darkTheme-background);
 }

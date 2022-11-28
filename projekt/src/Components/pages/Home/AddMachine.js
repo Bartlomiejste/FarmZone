@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../../supabase/config";
+import style from "../Home/Home.module.css";
 
 const AddMachine = () => {
   const navigate = useNavigate();
@@ -26,16 +27,19 @@ const AddMachine = () => {
     if (data) {
       console.log(data);
       setFormError(null);
-      navigate("/main");
+      navigate(
+        "/main"
+      ); /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!navigate?*/
     }
   };
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={style.form__container}>
         <select
           name="category"
           defaultValue="Kategoria"
           onChange={(e) => setCategory(e.target.value)}
+          className={style.form__option}
         >
           <option disabled value="Kategoria">
             Kategoria
@@ -49,14 +53,17 @@ const AddMachine = () => {
           type="text"
           name="name"
           placeholder="Nazwa"
+          autoComplete="off"
           value={Name}
           onChange={(e) => setName(e.target.value)}
+          className={style.form__option}
         />
 
         <select
           name="condition"
           defaultValue="Stan"
           onChange={(e) => setCondition(e.target.value)}
+          className={style.form__option}
         >
           <option disabled value="Stan">
             Stan
@@ -69,6 +76,7 @@ const AddMachine = () => {
           name="damage"
           defaultValue="Uszkodzenia"
           onChange={(e) => setDamage(e.target.value)}
+          className={style.form__option}
         >
           <option disabled value="Uszkodzenia">
             Uszkodzenia
@@ -83,10 +91,12 @@ const AddMachine = () => {
           placeholder="Cena w zł"
           value={Price}
           onChange={(e) => setPrice(e.target.value)}
+          className={style.form__option}
+          autoComplete="off"
         />
 
-        <button>Dodaj urządzenie</button>
-        {formError && <p>{formError}</p>}
+        <button className={style.form__btn}>Dodaj urządzenie</button>
+        {formError && <p className={style.form__error}>{formError}</p>}
       </form>
     </div>
   );

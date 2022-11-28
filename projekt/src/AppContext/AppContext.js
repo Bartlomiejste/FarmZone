@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from "react";
-import style from "../Components/Header/Header.module.css";
+
 export const AppContext = createContext(undefined);
 
 export const AppContextProvider = ({ children }) => {
@@ -16,7 +16,12 @@ export const AppContextProvider = ({ children }) => {
 
   return (
     <AppContext.Provider
-      value={{ change: handleToggle, visible, set: darkMode, isDarkTheme }}
+      value={{
+        change: handleToggle,
+        visible,
+        set: darkMode,
+        isDarkTheme,
+      }}
     >
       {children}
     </AppContext.Provider>

@@ -7,6 +7,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
 import style from "../Home/Home.module.css";
 import { useState } from "react";
@@ -15,6 +17,7 @@ import { useContext } from "react";
 import { AppContext } from "../../../AppContext/AppContext";
 import AddMachine from "./AddMachine";
 import { supabase } from "../../../supabase/config";
+import Delete from "@mui/icons-material/Delete";
 
 export default function Home() {
   const { isDarkTheme } = useContext(AppContext);
@@ -38,6 +41,20 @@ export default function Home() {
     }
   };
 
+  const handleDelete = async () => {
+    const { data: Machine, error } = await supabase
+      .from("Machine")
+      .delete()
+      .eq("id", Machine.id);
+
+    if (error) {
+      console.log(Machine);
+    }
+    if (Machine) {
+      console.log(Machine);
+    }
+  };
+
   return (
     <div className={style.home__section}>
       <AddMachine />
@@ -45,7 +62,7 @@ export default function Home() {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              {/* zmiana koloru nagłówków !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! - może ze zmiennymi ten kolor ?*/}
+              {/* zmiana koloru nagłówków !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! bg-black/ color:white*/}
 
               <TableCell
                 align="center"
@@ -92,6 +109,15 @@ export default function Home() {
               >
                 Cena w zł
               </TableCell>
+              <TableCell
+                align="center"
+                style={{
+                  fontWeight: "bold",
+                  background: "#4caf4faf",
+                }}
+              >
+                Akcja
+              </TableCell>
             </TableRow>
           </TableHead>
 
@@ -123,6 +149,12 @@ export default function Home() {
                 </TableCell>
 
                 <TableCell align="center">{name.Price}</TableCell>
+                <TableCell align="left" sx={{ width: 90 }}>
+                  <div className={style.table__icon}>
+                    <EditIcon color="primary" />
+                    <DeleteIcon onClick={handleDelete} />
+                  </div>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
