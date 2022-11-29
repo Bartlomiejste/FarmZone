@@ -9,6 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import EditRow from "./EditRow";
 
 import style from "../Home/Home.module.css";
 import { useState } from "react";
@@ -17,11 +18,9 @@ import { useContext } from "react";
 import { AppContext } from "../../../AppContext/AppContext";
 import AddMachine from "./AddMachine";
 import { supabase } from "../../../supabase/config";
-import Delete from "@mui/icons-material/Delete";
 
 export default function Home() {
   const { isDarkTheme } = useContext(AppContext);
-
   const [errors, setErrors] = useState(null);
   const [namerow, setNamerow] = useState([]);
 
@@ -41,18 +40,17 @@ export default function Home() {
     }
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (id) => {
     const { data: Machine, error } = await supabase
       .from("Machine")
       .delete()
-      .eq("id", Machine.id);
+      .eq("id", id);
+    if (error) throw error;
 
-    if (error) {
-      console.log(Machine);
-    }
     if (Machine) {
       console.log(Machine);
     }
+    getAllMachnies();
   };
 
   return (
@@ -151,8 +149,11 @@ export default function Home() {
                 <TableCell align="center">{name.Price}</TableCell>
                 <TableCell align="left" sx={{ width: 90 }}>
                   <div className={style.table__icon}>
-                    <EditIcon color="primary" />
-                    <DeleteIcon onClick={handleDelete} />
+                    <EditIcon />
+                    <DeleteIcon
+                      color="primary"
+                      onClick={() => handleDelete(name.id)}
+                    />
                   </div>
                 </TableCell>
               </TableRow>

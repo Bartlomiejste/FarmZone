@@ -61,5 +61,5 @@
 
 .table__icon {
     cursor: pointer;
-    color: purple;
+    color: var(--main-green-color)
 }
