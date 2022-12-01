@@ -20,36 +20,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 import axios from "axios";
 
-export const SideNavBar = () => {
-  const { visible } = useContext(AppContext);
-  const { change } = useContext(AppContext);
-
-  const { isDarkTheme } = useContext(AppContext);
-
-  const [logout, setLogout] = useState(false);
-  const [user, setUser] = useState([]);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    axios({
-      method: "GET",
-      url: "http://localhost:3000/user/",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => {
-        setUser(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  const userLogin = user.map((user, id) => {
-    return <p key={id}>{user.Login}</p>;
-  });
-
-  const menuItems = [
+export const SideNavBar = (text) => {
+  const [menuItems, setMenuItems] = useState([
     {
       text: "Pulpit",
       icon: <HomeIcon />,
@@ -85,7 +57,33 @@ export const SideNavBar = () => {
       icon: <ImportContactsIcon />,
       path: "/information",
     },
-  ];
+  ]);
+  const { visible } = useContext(AppContext);
+  const { change } = useContext(AppContext);
+  const { isDarkTheme } = useContext(AppContext);
+
+  const [logout, setLogout] = useState(false);
+  const [user, setUser] = useState([]);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "http://localhost:3000/user/",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const userLogin = user.map((user, id) => {
+    return <p key={id}>{user.Login}</p>;
+  });
 
   return (
     <Suspense
@@ -138,6 +136,7 @@ export const SideNavBar = () => {
         >
           {menuItems.map(({ text, icon, path }) => (
             <Link
+              key={text}
               className={`${style.menu__navigation_link} ${
                 visible
                   ? style.menu__navigation_link

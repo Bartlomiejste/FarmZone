@@ -46,8 +46,13 @@ export const LoginPage = () => {
           Login: "",
           Password: "",
         }}
-        validationSchema={SignupSchema}
         onSubmit={(values) => {
+          // tabelke z login haslo
+          // user login
+          // pobierasz z bazy login haslo
+          // czy takie samo
+          // -> wpuszczamy i do context ze zalogowany
+          // -> jak nie to blad
           navigate("/main");
           const currentinputValue = inputValue.current.value;
           console.log(currentinputValue);

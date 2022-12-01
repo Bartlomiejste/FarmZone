@@ -1,3 +1,4 @@
+import { SignupSchema } from "./AddMachineValidation";
 import React, { useState } from "react";
 import { supabase } from "../../../supabase/config";
 import style from "../Home/Home.module.css";
@@ -11,27 +12,30 @@ const AddMachine = () => {
   const [formError, setFormError] = useState(null);
   const [machines, setMachines] = useState([]);
 
-  const createMachine = async (e) => {
+  const CreateMachine = async (e) => {
     e.preventDefault();
-    if (!Category || !Name || !Condition || !Damage || !Price) {
-      setFormError("Uzupełnij wszystkie pola");
-    }
+    SignupSchema
+      ? setFormError("Uzupełnij wszystkie pola")
+      : setFormError(null);
     const { data, error } = await supabase
       .from("Machine")
       .insert([{ Category, Name, Damage, Condition, Price }]);
 
-    if (error) throw error;
+    if (error) {
+      throw error;
+    }
     console.log(error);
-    window.location.reload();
 
     if (data) {
       setMachines(data);
       setFormError(null);
     }
+    window.location.reload();
   };
+
   return (
     <div>
-      <form onClick={createMachine} className={style.form__container}>
+      <form onSubmit={CreateMachine} className={style.form__container}>
         <select
           name="category"
           defaultValue="Kategoria"
