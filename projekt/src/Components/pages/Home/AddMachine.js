@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { supabase } from "../../../supabase/config";
 import style from "../Home/Home.module.css";
 
@@ -10,8 +9,9 @@ const AddMachine = () => {
   const [Condition, setCondition] = useState("");
   const [Price, setPrice] = useState("");
   const [formError, setFormError] = useState(null);
+  const [machines, setMachines] = useState([]);
 
-  const handleSubmit = async (e) => {
+  const createMachine = async (e) => {
     e.preventDefault();
     if (!Category || !Name || !Condition || !Damage || !Price) {
       setFormError("Uzupełnij wszystkie pola");
@@ -19,18 +19,19 @@ const AddMachine = () => {
     const { data, error } = await supabase
       .from("Machine")
       .insert([{ Category, Name, Damage, Condition, Price }]);
+
     if (error) throw error;
     console.log(error);
     window.location.reload();
 
     if (data) {
-      console.log(data);
+      setMachines(data);
       setFormError(null);
     }
   };
   return (
     <div>
-      <form onClick={handleSubmit} className={style.form__container}>
+      <form onClick={createMachine} className={style.form__container}>
         <select
           name="category"
           defaultValue="Kategoria"
@@ -46,11 +47,10 @@ const AddMachine = () => {
         </select>
 
         <input
-          type="text"
           name="name"
+          type="text"
           placeholder="Nazwa"
           autoComplete="off"
-          value={Name}
           onChange={(e) => setName(e.target.value)}
           className={style.form__option}
         />
@@ -82,13 +82,12 @@ const AddMachine = () => {
         </select>
 
         <input
-          type="number"
           name="price"
+          type="number"
           placeholder="Cena w zł"
-          value={Price}
+          autoComplete="off"
           onChange={(e) => setPrice(e.target.value)}
           className={style.form__option}
-          autoComplete="off"
         />
 
         <button className={style.form__btn}>Dodaj urządzenie</button>

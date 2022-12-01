@@ -63,3 +63,10 @@
     cursor: pointer;
     color: var(--main-green-color)
 }
+
+
+.form__option_edit {
+    text-align: center;
+    width: 80px;
+    height: 25px;
+}
