@@ -18,44 +18,50 @@ import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArro
 import MenuItem from "@mui/material/MenuItem";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ImportContactsIcon from "@mui/icons-material/ImportContacts";
+import FolderIcon from "@mui/icons-material/Folder";
 import axios from "axios";
 
-export const SideNavBar = (text) => {
+export const SideNavBar = () => {
   const [menuItems, setMenuItems] = useState([
     {
       text: "Pulpit",
       icon: <HomeIcon />,
-      path: "/main",
+      path: "/pulpit",
     },
     {
       text: "Analiza zysków i strat",
       icon: <BarChartIcon />,
-      path: "/analysis",
+      path: "/analiza",
     },
     {
       text: "Mapa",
       icon: <AddLocationAltIcon />,
-      path: "/map",
+      path: "/mapa",
     },
     {
       text: "Planowanie",
       icon: <WorkHistoryIcon />,
-      path: "/planning",
+      path: "/planowanie",
     },
     {
       text: "Kalendarz",
       icon: <CalendarMonthIcon />,
-      path: "/calendar",
+      path: "/kalendarz",
     },
     {
       text: "Kontakt i pomoc",
       icon: <ContactMailIcon />,
-      path: "/contact",
+      path: "/kontakt",
     },
     {
       text: "Najnowsze informacje",
       icon: <ImportContactsIcon />,
-      path: "/information",
+      path: "/informacje",
+    },
+    {
+      text: "Dokumenty",
+      icon: <FolderIcon />,
+      path: "/dokumenty",
     },
   ]);
   const { visible } = useContext(AppContext);

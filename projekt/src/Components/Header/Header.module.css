@@ -17,20 +17,24 @@
     color: var(--main-darkgreen-color)
 }
 
+.header__name_navName::first-letter {
+    text-transform: capitalize;
+}
+
 .header__img {
     width: 75%;
     height: auto;
 }
 
 .header__switch {
-    margin:-20px;
+    margin: -20px;
     align-self: flex-start;
-    
+
 }
 
 /* ciemny styl */
 
 .dark {
-    color:var(--darkTheme-color);
-    background:var(--darkTheme-background);
+    color: var(--darkTheme-color);
+    background: var(--darkTheme-background);
 }

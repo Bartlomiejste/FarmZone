@@ -3,12 +3,13 @@ import style from "../Header/Header.module.css";
 import logo from "../../images/FarmZone.png";
 import { useContext } from "react";
 import { AppContext } from "../../AppContext/AppContext";
-
 import Switch from "@mui/material/Switch";
 
 const Header = () => {
   const { set } = useContext(AppContext);
   const { isDarkTheme } = useContext(AppContext);
+
+  const pathname = window.location.pathname;
 
   return (
     <>
@@ -17,7 +18,7 @@ const Header = () => {
           <p className={style.header__name_title}>
             Gospodarstwo: Gospodarstwo testowe
           </p>
-          <p className={style.header__name_navName}>Pulpit</p>
+          <p className={style.header__name_navName}>{pathname.split("/")}</p>
         </div>
         <div>
           <img src={logo} alt="logo" className={style.header__img}></img>

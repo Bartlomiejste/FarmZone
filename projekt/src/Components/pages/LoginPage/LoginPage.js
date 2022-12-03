@@ -53,7 +53,7 @@ export const LoginPage = () => {
           // czy takie samo
           // -> wpuszczamy i do context ze zalogowany
           // -> jak nie to blad
-          navigate("/main");
+          navigate("/pulpit");
           const currentinputValue = inputValue.current.value;
           console.log(currentinputValue);
           console.log(values);
