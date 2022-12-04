@@ -4,6 +4,7 @@ export const AppContext = createContext(undefined);
 
 export const AppContextProvider = ({ children }) => {
   const [visible, setVisible] = useState(true);
+  const [isUserLogged, setIsUserLogged] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   const handleToggle = () => {
@@ -14,6 +15,10 @@ export const AppContextProvider = ({ children }) => {
     setIsDarkTheme(!isDarkTheme);
   };
 
+  const login = () => {
+    setIsUserLogged(true);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -21,6 +26,8 @@ export const AppContextProvider = ({ children }) => {
         visible,
         set: darkMode,
         isDarkTheme,
+        user: login,
+        isUserLogged,
       }}
     >
       {children}

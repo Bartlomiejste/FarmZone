@@ -22,6 +22,7 @@
     cursor: pointer;
     color: #ffffff;
     overflow: hidden;
+    transition: 0.5s linear;
 }
 
 .menu__arrow:hover {
@@ -29,13 +30,14 @@
 }
 
 .menu__avatar {
-    height: 70px;
+    height: 62px;
     margin: 20px;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
     color: #ffffff;
     font-weight: 600;
+    transition: 0.5s linear;
 }
 
 .menu__logout {
@@ -49,6 +51,7 @@
     padding: 0 80px;
     cursor: pointer;
     border-bottom: 1px solid lightgray;
+    transition: 0.5s linear;
 }
 
 
@@ -81,7 +84,7 @@
 }
 
 .menu__navigation_icon {
-    margin-right: 15px;
+    margin-right: 20px;
     display: flex;
 }
 
@@ -98,44 +101,23 @@
     width: 100%;
     font-size: 12px;
     color: #ffffff;
+    transition: 0.5s linear;
 }
 
 
 /* style do chowanego menu */
 
 .container_min {
-    display: flex;
-    flex-direction: column;
     width: 5%;
-    height: auto;
     position: absolute;
-    top: 0;
-    left: 0;
-    background: var(--main-nav-color);
-    transition: 0.5s linear;
-
-}
-
-.menu__logout_min {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 100%;
-    height: 60px;
-    background-color: #000000;
-    color: #ffffff;
-    padding: 0 10px;
-    cursor: pointer;
-    border-bottom: 1px solid lightgray;
 }
 
 .menu__arrow_min {
-    display: flex;
     width: 30%;
-    padding: 5px;
-    border-radius: 0 0 0 15px;
-    background: var(--main-green-color);
-    color: #ffffff;
+}
+
+.menu__logout_min {
+    padding: 0;
     cursor: pointer;
 }
 
@@ -145,15 +127,10 @@
 
 
 .menu__navigation_footer_min {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    height: 360px;
     padding: 15px;
-    width: 100%;
     font-size: 8px;
-    color: #ffffff;
 }
+
 
 
 /* ciemny styl */

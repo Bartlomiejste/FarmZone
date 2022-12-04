@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./LoginPage.module.css";
 import images from "../../../images/FarmZone.png";
 import { useState, useRef } from "react";
@@ -6,6 +6,7 @@ import { Formik, Form, Field } from "formik";
 import { SignupSchema } from "./ValidationLoginPage";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "../../../supabase/config";
 
 export function FormField({ name, errors, touched }) {
   return (
@@ -17,27 +18,44 @@ export function FormField({ name, errors, touched }) {
   );
 }
 
-function validateLogin(value) {
-  let error;
-  if (value !== "Admin") {
-    error = "Use the set login: Admin";
-  }
-  return error;
-}
+// function validateLogin(value) {
+//   let error;
+//   if (value !== "Admin") {
+//     error = "Use the set login: Admin";
+//   }
+//   return error;
+// }
 
-function validatePassword(value) {
-  let error;
-  if (value !== "12345") {
-    error = "Use the set password: 12345 ";
-  }
-  return error;
-}
+// function validatePassword(value) {
+//   let error;
+//   if (value !== "12345") {
+//     error = "Use the set password: 12345 ";
+//   }
+//   return error;
+// }
 
 export const LoginPage = () => {
   const [login, setLogin] = useState();
   const navigate = useNavigate();
 
-  let inputValue = useRef();
+  // let inputValue = useRef();
+
+  const [userLoginName, setUserLoginName] = useState(null);
+  const [userLogin, setUserLogin] = useState(null);
+  const [errorForm, setErrorForm] = useState(null);
+
+  const getUserLogin = async () => {
+    let { data: User, error } = await supabase.from("User").select("*");
+    if (error) {
+      setErrorForm("Błąd");
+      console.log(error);
+    }
+    if (User) {
+      setUserLogin(User);
+      setErrorForm(null);
+      console.log(User);
+    }
+  };
 
   return (
     <>
@@ -46,29 +64,17 @@ export const LoginPage = () => {
           Login: "",
           Password: "",
         }}
-        onSubmit={(values) => {
+        onSubmit={() => {
           // tabelke z login haslo
           // user login
           // pobierasz z bazy login haslo
           // czy takie samo
           // -> wpuszczamy i do context ze zalogowany
           // -> jak nie to blad
-          navigate("/pulpit");
-          const currentinputValue = inputValue.current.value;
-          console.log(currentinputValue);
-          console.log(values);
-          axios({
-            method: "GET",
-            url: "http://localhost:3000/user/",
-            headers: { "Content-Type": "application/json" },
-            data: values,
-          })
-            .then(function (data) {
-              setLogin(data);
-            })
-            .catch(function (data) {
-              console.log(data);
-            });
+          // navigate("/pulpit");
+          // const currentinputValue = inputValue.current.value;
+          // console.log(currentinputValue);
+          // console.log(values);
         }}
       >
         <div>
@@ -76,7 +82,7 @@ export const LoginPage = () => {
             <img src={images} className={style.container__images} alt="logo" />
             <div className={style.login}>
               <h1 className={style.login__title}>Logowanie do systemu</h1>
-              <Field name={"Login"} validate={validateLogin}>
+              <Field name={"Login"}>
                 {({ field, meta }) => (
                   <div>
                     <input
@@ -84,7 +90,7 @@ export const LoginPage = () => {
                       type="text"
                       placeholder="Login"
                       {...field}
-                      ref={inputValue}
+                      // ref={inputValue}
                     />
                     {meta.touched && meta.error && (
                       <div className={style.error}>{meta.error}</div>
@@ -92,7 +98,7 @@ export const LoginPage = () => {
                   </div>
                 )}
               </Field>
-              <Field name={"Password"} validate={validatePassword}>
+              <Field name={"Password"}>
                 {({ field, meta }) => (
                   <div>
                     <input
@@ -107,7 +113,11 @@ export const LoginPage = () => {
                   </div>
                 )}
               </Field>
-              <button type="submit" className={style.login__btn}>
+              <button
+                onClick={getUserLogin}
+                type="submit"
+                className={style.login__btn}
+              >
                 Zaloguj
               </button>
             </div>
