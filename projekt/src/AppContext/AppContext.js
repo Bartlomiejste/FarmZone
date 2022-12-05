@@ -15,8 +15,13 @@ export const AppContextProvider = ({ children }) => {
     setIsDarkTheme(!isDarkTheme);
   };
 
-  const login = () => {
-    setIsUserLogged(true);
+  const toLogin = (Login, Password) => {
+    if (Password === Password && Login === Login) {
+      setIsUserLogged(!isUserLogged);
+    }
+  };
+  const toLogout = () => {
+    setIsUserLogged(false);
   };
 
   return (
@@ -26,8 +31,9 @@ export const AppContextProvider = ({ children }) => {
         visible,
         set: darkMode,
         isDarkTheme,
-        user: login,
+        userLog: toLogin,
         isUserLogged,
+        userLogOut: toLogout,
       }}
     >
       {children}

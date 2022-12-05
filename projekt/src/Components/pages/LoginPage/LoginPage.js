@@ -1,48 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import style from "./LoginPage.module.css";
 import images from "../../../images/FarmZone.png";
 import { useState, useRef } from "react";
 import { Formik, Form, Field } from "formik";
 import { SignupSchema } from "./ValidationLoginPage";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { supabase } from "../../../supabase/config";
+import { AppContext } from "../../../AppContext/AppContext";
+import Home from "../Home/Home";
 
-export function FormField({ name, errors, touched }) {
+export function FormField({ name, errors, touched, value }) {
   return (
     <div>
       <label>{name} </label>
-      <Field name={name} />
+      <Field name={name} value={value} />
       {errors[name] && touched[name] ? <div>{errors[name]}</div> : null}
     </div>
   );
 }
 
-// function validateLogin(value) {
-//   let error;
-//   if (value !== "Admin") {
-//     error = "Use the set login: Admin";
-//   }
-//   return error;
-// }
-
-// function validatePassword(value) {
-//   let error;
-//   if (value !== "12345") {
-//     error = "Use the set password: 12345 ";
-//   }
-//   return error;
-// }
-
 export const LoginPage = () => {
-  const [login, setLogin] = useState();
+  const [login, setLogin] = useState("");
+
+  const [userLogin, setUserLogin] = useState("");
+
+  const [errorForm, setErrorForm] = useState(null);
+
+  const { userLog } = useContext(AppContext);
+  const { isUserLogged } = useContext(AppContext);
+  const { toLogin } = useContext(AppContext);
+
+  const ref = useRef();
   const navigate = useNavigate();
 
-  // let inputValue = useRef();
-
-  const [userLoginName, setUserLoginName] = useState(null);
-  const [userLogin, setUserLogin] = useState(null);
-  const [errorForm, setErrorForm] = useState(null);
+  useEffect(() => {
+    getUserLogin();
+  }, []);
 
   const getUserLogin = async () => {
     let { data: User, error } = await supabase.from("User").select("*");
@@ -53,76 +47,81 @@ export const LoginPage = () => {
     if (User) {
       setUserLogin(User);
       setErrorForm(null);
-      console.log(User);
     }
   };
-
+  const checked = () => {
+    login ? console.log("tak") : console.log("nie");
+  };
   return (
     <>
       <Formik
         initialValues={{
+          id: 1,
           Login: "",
           Password: "",
         }}
-        onSubmit={() => {
-          // tabelke z login haslo
-          // user login
-          // pobierasz z bazy login haslo
-          // czy takie samo
-          // -> wpuszczamy i do context ze zalogowany
-          // -> jak nie to blad
-          // navigate("/pulpit");
-          // const currentinputValue = inputValue.current.value;
-          // console.log(currentinputValue);
-          // console.log(values);
+        validationSchema={SignupSchema}
+        onSubmit={(values) => {
+          setLogin(values);
+          console.log(userLogin);
+          console.log(login);
+          checked();
         }}
       >
-        <div>
-          <Form className={style.container}>
-            <img src={images} className={style.container__images} alt="logo" />
-            <div className={style.login}>
-              <h1 className={style.login__title}>Logowanie do systemu</h1>
-              <Field name={"Login"}>
-                {({ field, meta }) => (
-                  <div>
-                    <input
-                      className={style.login__input}
-                      type="text"
-                      placeholder="Login"
-                      {...field}
-                      // ref={inputValue}
-                    />
-                    {meta.touched && meta.error && (
-                      <div className={style.error}>{meta.error}</div>
-                    )}
-                  </div>
-                )}
-              </Field>
-              <Field name={"Password"}>
-                {({ field, meta }) => (
-                  <div>
-                    <input
-                      className={style.login__input}
-                      type="Password"
-                      placeholder="Password"
-                      {...field}
-                    />
-                    {meta.touched && meta.error && (
-                      <div className={style.error}>{meta.error}</div>
-                    )}
-                  </div>
-                )}
-              </Field>
-              <button
-                onClick={getUserLogin}
-                type="submit"
-                className={style.login__btn}
-              >
-                Zaloguj
-              </button>
-            </div>
-          </Form>
-        </div>
+        {({ handleSubmit, handleChange, handleBlur, values }) => (
+          <div>
+            <Form onSubmit={handleSubmit} className={style.container}>
+              <img
+                src={images}
+                className={style.container__images}
+                alt="logo"
+              />
+              <div className={style.login}>
+                <h1 className={style.login__title}>Logowanie do systemu</h1>
+                <Field name={"Login"}>
+                  {({ field, meta }) => (
+                    <div>
+                      <input
+                        className={style.login__input}
+                        type="text"
+                        placeholder="Login"
+                        {...field}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.Login}
+                      />
+                      {meta.touched && meta.error && (
+                        <div className={style.error}>{meta.error}</div>
+                      )}
+                    </div>
+                  )}
+                </Field>
+                <Field name={"Password"}>
+                  {({ field, meta }) => (
+                    <div>
+                      <input
+                        className={style.login__input}
+                        type="Password"
+                        placeholder="Password"
+                        {...field}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.Password}
+                      />
+                      {meta.touched && meta.error && (
+                        <div className={style.error}>{meta.error}</div>
+                      )}
+                    </div>
+                  )}
+                </Field>
+                {errorForm}
+                <button type="submit" className={style.login__btn}>
+                  Zaloguj
+                </button>
+              </div>
+            </Form>
+          </div>
+        )}
       </Formik>
     </>
   );
