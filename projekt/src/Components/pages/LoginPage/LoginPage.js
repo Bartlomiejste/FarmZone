@@ -1,14 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import style from "./LoginPage.module.css";
 import images from "../../../images/FarmZone.png";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { SignupSchema } from "./ValidationLoginPage";
-import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+
 import { supabase } from "../../../supabase/config";
-import { AppContext } from "../../../AppContext/AppContext";
-import Home from "../Home/Home";
 
 export function FormField({ name, errors, touched, value }) {
   return (
@@ -27,45 +24,32 @@ export const LoginPage = () => {
 
   const [errorForm, setErrorForm] = useState(null);
 
-  const { userLog } = useContext(AppContext);
-  const { isUserLogged } = useContext(AppContext);
-  const { toLogin } = useContext(AppContext);
+  // useEffect(() => {
+  //   getUserLogin();
+  // }, []);
 
-  const ref = useRef();
-  const navigate = useNavigate();
+  // const getUserLogin = async () => {
+  //   let { data: User, error } = await supabase.from("User").select("*");
+  //   if (error) {
+  //     setErrorForm("Błąd");
+  //     console.log(error);
+  //   }
+  //   if (User) {
+  //     setUserLogin(User);
+  //     setErrorForm(null);
+  //   }
+  // };
 
-  useEffect(() => {
-    getUserLogin();
-  }, []);
-
-  const getUserLogin = async () => {
-    let { data: User, error } = await supabase.from("User").select("*");
-    if (error) {
-      setErrorForm("Błąd");
-      console.log(error);
-    }
-    if (User) {
-      setUserLogin(User);
-      setErrorForm(null);
-    }
-  };
-  const checked = () => {
-    login ? console.log("tak") : console.log("nie");
-  };
   return (
     <>
       <Formik
         initialValues={{
-          id: 1,
           Login: "",
           Password: "",
         }}
         validationSchema={SignupSchema}
         onSubmit={(values) => {
           setLogin(values);
-          console.log(userLogin);
-          console.log(login);
-          checked();
         }}
       >
         {({ handleSubmit, handleChange, handleBlur, values }) => (

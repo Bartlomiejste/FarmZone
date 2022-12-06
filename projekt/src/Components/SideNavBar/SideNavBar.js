@@ -68,8 +68,9 @@ export const SideNavBar = () => {
   const { change } = useContext(AppContext);
   const { isDarkTheme } = useContext(AppContext);
 
-  const [logout, setLogout] = useState(false);
   const [user, setUser] = useState([]);
+
+  const { userLogOut } = useContext(AppContext);
 
   const navigate = useNavigate();
 
@@ -128,9 +129,8 @@ export const SideNavBar = () => {
           className={`${style.menu__logout} ${
             visible ? style.menu__logout : style.menu__logout_min
           }`}
-          onClick={() => setLogout(!logout)}
+          onClick={userLogOut}
         >
-          {logout ? navigate("/") : null}
           <LogoutIcon />
           {visible ? <p>Wyloguj</p> : null}
         </div>

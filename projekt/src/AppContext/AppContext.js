@@ -1,4 +1,5 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
+import { supabase } from "../../../projekt/src/supabase/config";
 
 export const AppContext = createContext(undefined);
 
@@ -6,6 +7,23 @@ export const AppContextProvider = ({ children }) => {
   const [visible, setVisible] = useState(true);
   const [isUserLogged, setIsUserLogged] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [errorForm, setErrorForm] = useState(null);
+
+  useEffect(() => {
+    getUserLogin();
+  }, []);
+
+  const getUserLogin = () => {
+    let { data: User, error } = supabase.from("User").select("*");
+    if (error) {
+      setErrorForm("Błąd");
+      console.log(error);
+    }
+    if (User) {
+      setIsUserLogged(User);
+      setErrorForm(null);
+    }
+  };
 
   const handleToggle = () => {
     setVisible(!visible);
@@ -15,13 +33,12 @@ export const AppContextProvider = ({ children }) => {
     setIsDarkTheme(!isDarkTheme);
   };
 
-  const toLogin = (Login, Password) => {
-    if (Password === Password && Login === Login) {
-      setIsUserLogged(!isUserLogged);
-    }
+  const login = () => {
+    setIsUserLogged(!isUserLogged);
   };
-  const toLogout = () => {
-    setIsUserLogged(false);
+
+  const logout = () => {
+    setIsUserLogged(isUserLogged);
   };
 
   return (
@@ -31,9 +48,11 @@ export const AppContextProvider = ({ children }) => {
         visible,
         set: darkMode,
         isDarkTheme,
-        userLog: toLogin,
+
+        toLogin: login,
         isUserLogged,
-        userLogOut: toLogout,
+
+        toLogout: logout,
       }}
     >
       {children}

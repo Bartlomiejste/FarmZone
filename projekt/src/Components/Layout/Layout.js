@@ -7,12 +7,21 @@ import SideNavBar from "../SideNavBar/SideNavBar";
 
 export const Layout = ({ children }) => {
   const { visible } = useContext(AppContext);
-  // z konteksut isLogged children : /login
+  const { isUserLogged } = useContext(AppContext);
+
   return (
-    <div className={`${style.main} ${visible ? style.main : style.main_min}`}>
-      <Header />
-      <SideNavBar />
-      {children}
-    </div>
+    <>
+      {isUserLogged ? (
+        <div
+          className={`${style.main} ${visible ? style.main : style.main_min}`}
+        >
+          <Header />
+          <SideNavBar />
+          {children}
+        </div>
+      ) : (
+        console.log("niezalogowany")
+      )}
+    </>
   );
 };
