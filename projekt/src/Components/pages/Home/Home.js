@@ -39,9 +39,31 @@ export default function Home() {
     }
   };
 
+  let buyDevice = 0;
+  rowname.forEach(myFunction);
+  function myFunction(price) {
+    buyDevice += price.Price;
+  }
+
   return (
     <>
       <div className={style.home__section}>
+        <div className={style.home__information}>
+          <p style={{ fontWeight: "bold" }}>Ogólne podsumowanie:</p>
+          <p>
+            Saldo:
+            <span className={style.darkgreen}>2600</span>
+          </p>
+          <p>
+            Zakup maszyn:<span className={style.yellow}> -{buyDevice}</span>
+          </p>
+          <p>
+            Awarie:<span className={style.red}> -2000</span>
+          </p>
+          <p>
+            Zebrane plony:<span className={style.green}> +40000</span>
+          </p>
+        </div>
         <AddMachine />
 
         <TableContainer component={Paper}>

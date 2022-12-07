@@ -1,3 +1,45 @@
 .information__section {
     padding: 20px 35px;
 }
+
+.information__grid {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 250px 250px 250px 0.5fr;
+    grid-template-rows: 200px 200px 200px 1fr;
+    grid-template-areas:
+        "a b c d"
+        "e f f d"
+        "g h i i";
+    gap: 10px;
+
+}
+
+.green {
+    background-color: green;
+
+}
+
+p:hover {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: 0.5s linear;
+    color: yellow;
+}
+
+.yellow {
+    background-color: yellow;
+    grid-area: d;
+}
+
+.black {
+    background: black;
+    grid-area: f;
+}
+
+.pink {
+    background: pink;
+    grid-area: i;
+}

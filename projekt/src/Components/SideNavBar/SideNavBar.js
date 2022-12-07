@@ -68,29 +68,25 @@ export const SideNavBar = () => {
   const { change } = useContext(AppContext);
   const { isDarkTheme } = useContext(AppContext);
 
-  const [user, setUser] = useState([]);
-
   const { userLogOut } = useContext(AppContext);
 
-  const navigate = useNavigate();
+  // useEffect(() => {
+  //   axios({
+  //     method: "GET",
+  //     url: "http://localhost:3000/user/",
+  //     headers: { "Content-Type": "application/json" },
+  //   })
+  //     .then((res) => {
+  //       setUser(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
-  useEffect(() => {
-    axios({
-      method: "GET",
-      url: "http://localhost:3000/user/",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => {
-        setUser(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  const userLogin = user.map((user, id) => {
-    return <p key={id}>{user.Login}</p>;
-  });
+  // const userLogin = user.map((user, id) => {
+  //   return <p key={id}>{user.Login}</p>;
+  // });
 
   return (
     <Suspense
@@ -123,7 +119,7 @@ export const SideNavBar = () => {
           }`}
         >
           <Avatar src="/broken-image.jpg" sx={{ width: 56, height: 56 }} />
-          {visible ? userLogin : null}
+          {visible ? <p>Nazwa użytkownika</p> : null}
         </div>
         <div
           className={`${style.menu__logout} ${

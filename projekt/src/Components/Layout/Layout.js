@@ -11,7 +11,7 @@ export const Layout = ({ children }) => {
 
   return (
     <>
-      {isUserLogged ? (
+      {!isUserLogged ? (
         <div
           className={`${style.main} ${visible ? style.main : style.main_min}`}
         >
