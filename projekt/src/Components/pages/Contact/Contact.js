@@ -6,7 +6,6 @@ const Contact = () => {
   return (
     <Layout>
       <div className={styleContact.contact__section}>Contact</div>
-      <DelayedFallback />
     </Layout>
   );
 };
