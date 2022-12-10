@@ -5,7 +5,7 @@ import styleMap from "../Map/Map.module.css";
 const Map = () => {
   return (
     <Layout>
-      <div className={styleMap.map__section}>Map</div>
+      <div className={styleMap.map__section}></div>
     </Layout>
   );
 };

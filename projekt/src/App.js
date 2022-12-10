@@ -6,7 +6,7 @@ import Analysis from "./Components/pages/Analysis/Analysis";
 import Map from "./Components/pages/Map/Map";
 import Main from "./Components/pages/Main/Main";
 import Planning from "./Components/pages/Planning/Planning";
-import Calendar from "./Components/pages/Calendar/Calendar";
+import Calenda from "./Components/pages/Calendar/Calenda";
 import Contact from "./Components/pages/Contact/Contact";
 import Information from "./Components/pages/Information/Information";
 import Documents from "./Components/pages/Documents/Documents";
@@ -28,7 +28,7 @@ function App() {
 
             <Route path="/planowanie" element={<Planning />} />
 
-            <Route path="/kalendarz" element={<Calendar />} />
+            <Route path="/kalendarz" element={<Calenda />} />
 
             <Route path="/kontakt" element={<Contact />} />
 

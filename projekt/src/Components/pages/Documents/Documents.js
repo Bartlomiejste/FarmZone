@@ -2,8 +2,11 @@ import React, { useState, useRef, useEffect } from "react";
 import styleDocuments from "../Documents/Documents.module.css";
 import { Layout } from "../../Layout/Layout";
 import { supabase } from "../../../supabase/config";
+import Table from "react-bootstrap/Table";
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Documents = () => {
+  const [all, setAll] = useState([]);
   const [files, setFiles] = useState([]);
   const handleUpload = async (e) => {
     let file;
@@ -13,7 +16,7 @@ const Documents = () => {
     }
 
     const { data, error } = await supabase.storage
-      .from("images")
+      .from("images/File")
       .upload(file?.name, file);
 
     if (data) {
@@ -23,22 +26,35 @@ const Documents = () => {
 
   useEffect(() => {
     handleDownload();
+    alls();
   }, []);
 
   const handleDownload = async () => {
     const { data, error } = await supabase.storage
-      .from("images")
-      .download("/farmerPage.png");
+      .from("images/File")
+      .download("farmerPage.png");
     if (data) {
       setFiles(data);
     } else if (error) console.log(error);
   };
   console.log(files);
 
+  const alls = async () => {
+    const { res, error } = await supabase.storage.from("images").list();
+    if (res) {
+      setAll(res);
+    } else if (error) console.log(error);
+  };
+
+  console.log(all);
+
   return (
     <Layout>
       <div className={styleDocuments.documents__section}>
-        <form>
+        <form className={styleDocuments.documents__form}>
+          <label htmlFor="file" className={styleDocuments.documents__title}>
+            Dodaj dokument:
+          </label>
           <input
             type="file"
             accept="image/*"
@@ -47,17 +63,34 @@ const Documents = () => {
             }}
           />
         </form>
-        <button>Odśwież</button>
 
-        {Array.isArray(files)
-          ? files.map((type) => {
-              <p key={type}>{type.type}</p>;
-            })
-          : null}
+        <table className={styleDocuments.documents__table}>
+          <thead className={styleDocuments.documents__thead}>
+            <tr>
+              <th>Lp.</th>
+              <th>Nazwa pliku</th>
+              <th>Data utworzenia</th>
+              <th>Typ pliku</th>
+              <th>Rozmiar pliku</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {/* {Array.isArray(files)
+                ? files.map((type) => {
+                    <td>{type.type}</td>;
+                  })
+                : null} */}
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </Layout>
   );
 };
 
 export default Documents;
-// setSelectedFile(event.target.files[0]);

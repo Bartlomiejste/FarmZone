@@ -42,7 +42,7 @@ export default function Home() {
   let buyDevice = 0;
   rowname.forEach(myFunction);
   function myFunction(price) {
-    buyDevice += price.Price;
+    buyDevice -= price.Price;
   }
 
   return (
@@ -55,7 +55,7 @@ export default function Home() {
             <span className={style.darkgreen}>2600</span>
           </p>
           <p>
-            Zakup maszyn:<span className={style.yellow}> -{buyDevice}</span>
+            Zakup maszyn:<span className={style.yellow}> {buyDevice}</span>
           </p>
           <p>
             Awarie:<span className={style.red}> -2000</span>

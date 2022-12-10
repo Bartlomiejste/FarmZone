@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { supabase } from "../../../supabase/config";
 import style from "../Home/Home.module.css";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 const AddMachine = () => {
   const [Category, setCategory] = useState("");
@@ -85,6 +84,7 @@ const AddMachine = () => {
           </select>
 
           <input
+            min="0"
             name="price"
             type="number"
             placeholder="Cena w zł"

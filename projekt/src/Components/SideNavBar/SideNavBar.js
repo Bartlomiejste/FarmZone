@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import style from "../SideNavBar/SideNavBar.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AppContext } from "../../AppContext/AppContext";
 import { Suspense } from "react";
@@ -19,7 +19,6 @@ import MenuItem from "@mui/material/MenuItem";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 import FolderIcon from "@mui/icons-material/Folder";
-import axios from "axios";
 
 export const SideNavBar = () => {
   const [menuItems, setMenuItems] = useState([
@@ -69,24 +68,6 @@ export const SideNavBar = () => {
   const { isDarkTheme } = useContext(AppContext);
 
   const { userLogOut } = useContext(AppContext);
-
-  // useEffect(() => {
-  //   axios({
-  //     method: "GET",
-  //     url: "http://localhost:3000/user/",
-  //     headers: { "Content-Type": "application/json" },
-  //   })
-  //     .then((res) => {
-  //       setUser(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
-  // const userLogin = user.map((user, id) => {
-  //   return <p key={id}>{user.Login}</p>;
-  // });
 
   return (
     <Suspense
