@@ -1,6 +1,4 @@
 import React from "react";
-import styleCalendar from "../Calendar/Calendar.module.css";
-import { Layout } from "../../Layout/Layout";
 import { Calendar } from "primereact/calendar";
 import { addLocale } from "primereact/api";
 import { useState } from "react";
@@ -9,7 +7,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
 import "primereact/resources/primereact.min.css"; //core css
 import "primeicons/primeicons.css"; //icons
 
-const Calenda = () => {
+const Deadline = () => {
   let today = new Date();
   let month = today.getMonth();
   let year = today.getFullYear();
@@ -45,24 +43,65 @@ const Calenda = () => {
 
   let invalidDates = [today];
 
-  addLocale("es", {
-    firstDayOfWeek: 1,
-    monthNamesShort: [
-      "ene",
-      "feb",
-      "mar",
-      "abr",
-      "may",
-      "jun",
-      "jul",
-      "ago",
-      "sep",
-      "oct",
-      "nov",
-      "dic",
+  addLocale("pl", {
+    closeText: "Zamknij",
+    prevText: "Poprzedni",
+    nextText: "Następny",
+    monthNames: [
+      "Styczeń",
+      "Luty",
+      "Marzec",
+      "Kwiecień",
+      "Maj",
+      "Czerwiec",
+      "Lipiec",
+      "Sierpień",
+      "Wrzesień",
+      "Październik",
+      "Listopad",
+      "Grudzień",
     ],
-    today: "Hoy",
-    clear: "Limpiar",
+    monthNamesShort: [
+      "Sty",
+      "Lut",
+      "Mar",
+      "Kwi",
+      "Maj",
+      "Cze",
+      "Lip",
+      "Sie",
+      "Wrz",
+      "Paź",
+      "Lis",
+      "Gru",
+    ],
+    dayNames: [
+      "Niedziela",
+      "Poniedziałek",
+      "Wtorek",
+      "Środa",
+      "Czwartek",
+      "Piątek",
+      "Sobota",
+    ],
+    dayNamesShort: ["Nie", "Pon", "Wt", "Śr", "Czw", "Pt", "So"],
+    dayNamesMin: ["N", "P", "W", "Ś", "Cz", "P", "S"],
+    weekHeader: "Tydzień",
+    firstDay: 1,
+    isRTL: false,
+    showMonthAfterYear: false,
+    yearSuffix: "r",
+    timeOnlyTitle: "Tylko czas",
+    timeText: "Czas",
+    hourText: "Godzina",
+    minuteText: "Minuta",
+    secondText: "Sekunda",
+    currentText: "Teraz",
+    ampm: false,
+    month: "Miesiąc",
+    week: "Tydzień",
+    day: "Dzień",
+    allDayText: "Cały dzień",
   });
 
   const dateTemplate = (date) => {
@@ -81,19 +120,15 @@ const Calenda = () => {
     return date.day;
   };
   return (
-    <Layout>
-      <div className={styleCalendar.calendar__section}>
-        <div>
-          <Calendar
-            value={date14}
-            onChange={(e) => setDate14(e.value)}
-            inline
-            showWeek
-          />
-        </div>
-      </div>
-    </Layout>
+    <div>
+      <Calendar
+        value={date14}
+        onChange={(e) => setDate14(e.value)}
+        inline
+        showWeek
+      />
+    </div>
   );
 };
 
-export default Calenda;
+export default Deadline;

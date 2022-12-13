@@ -43,11 +43,6 @@ export const SideNavBar = () => {
       path: "/planowanie",
     },
     {
-      text: "Kalendarz",
-      icon: <CalendarMonthIcon />,
-      path: "/kalendarz",
-    },
-    {
       text: "Kontakt i pomoc",
       icon: <ContactMailIcon />,
       path: "/kontakt",
