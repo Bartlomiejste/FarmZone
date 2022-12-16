@@ -4,8 +4,10 @@ import images from "../../../images/FarmZone.png";
 import { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { SignupSchema } from "./ValidationLoginPage";
+import { useNavigate } from "react-router-dom";
 
 import { supabase } from "../../../supabase/config";
+import { AppContext } from "../../../AppContext/AppContext";
 
 export function FormField({ name, errors, touched, value }) {
   return (
@@ -17,28 +19,41 @@ export function FormField({ name, errors, touched, value }) {
   );
 }
 
-export const LoginPage = () => {
-  const [login, setLogin] = useState("");
-
-  const [userLogin, setUserLogin] = useState("");
+export const LoginPage = (props) => {
+  const [userLogin, setUserLogin] = useState([]);
 
   const [errorForm, setErrorForm] = useState(null);
 
-  // useEffect(() => {
-  //   getUserLogin();
-  // }, []);
+  const { isUserLogged, login } = useContext(AppContext);
 
-  // const getUserLogin = async () => {
-  //   let { data: User, error } = await supabase.from("User").select("*");
-  //   if (error) {
-  //     setErrorForm("Błąd");
-  //     console.log(error);
-  //   }
-  //   if (User) {
-  //     setUserLogin(User);
-  //     setErrorForm(null);
-  //   }
-  // };
+  const navigate = useNavigate();
+
+  const getUserLogin = async () => {
+    let { data: User, error } = await supabase.from("User").select("*");
+    if (error) {
+      setErrorForm("Błąd");
+      console.log(error);
+    }
+    if (User) {
+      setUserLogin(User);
+      setErrorForm(null);
+    }
+    return User;
+  };
+
+  const handleSubmit = async ({ Login, Password }) => {
+    const user = await getUserLogin();
+    if (user[0].Password === Password && user[0].Login === Login) {
+      login();
+      navigate("/pulpit");
+    }
+  };
+
+  useEffect(() => {
+    if (isUserLogged) {
+      navigate("/pulpit");
+    }
+  }, []);
 
   return (
     <>
@@ -48,9 +63,7 @@ export const LoginPage = () => {
           Password: "",
         }}
         validationSchema={SignupSchema}
-        onSubmit={(values) => {
-          setLogin(values);
-        }}
+        onSubmit={handleSubmit}
       >
         {({ handleSubmit, handleChange, handleBlur, values }) => (
           <div>

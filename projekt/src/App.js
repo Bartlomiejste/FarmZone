@@ -10,30 +10,34 @@ import Contact from "./Components/pages/Contact/Contact";
 import Information from "./Components/pages/Information/Information";
 import Documents from "./Components/pages/Documents/Documents";
 import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
+import { AppContextProvider } from "./AppContext/AppContext";
 
 function App() {
   return (
     <>
       <ErrorBoundary>
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<LoginPage />} />
+          <AppContextProvider>
+            <Routes>
+              <Route path="/" element={<LoginPage />} />
 
-            <Route path="/pulpit" element={<Main />} />
+              <Route path="/pulpit" element={<Main />} />
 
-            <Route path="/analiza" element={<Analysis />} />
+              <Route path="/analiza" element={<Analysis />} />
 
-            <Route path="/mapa" element={<Map />} />
+              <Route path="/mapa" element={<Map />} />
 
-            <Route path="/planowanie" element={<Planning />} />
+              <Route path="/planowanie" element={<Planning />} />
 
-            <Route path="/kontakt" element={<Contact />} />
+              <Route path="/informacje" element={<Information />} />
 
-            <Route path="/informacje" element={<Information />} />
+              <Route path="/dokumenty" element={<Documents />} />
 
-            <Route path="/dokumenty" element={<Documents />} />
-            {/* 404 */}
-          </Routes>
+              <Route path="/kontakt" element={<Contact />} />
+
+              {/* 404 */}
+            </Routes>
+          </AppContextProvider>
         </BrowserRouter>
       </ErrorBoundary>
     </>

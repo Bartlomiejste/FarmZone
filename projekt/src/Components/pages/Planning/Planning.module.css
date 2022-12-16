@@ -1,3 +1,11 @@
 .planning__section {
     padding: 20px 35px;
 }
+
+.form {
+    margin-top: 20px;
+}
+
+.inputDate {
+    height: 200px;
+}

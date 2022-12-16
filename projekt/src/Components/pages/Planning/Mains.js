@@ -3,14 +3,11 @@ import Clock from "./Clock";
 
 export function Mains() {
   const [timerDays, setTimerDays] = useState();
-  const [timerHours, setTimerHours] = useState();
-  const [timerMinutes, setTimerMinutes] = useState();
-  const [timerSeconds, setTimerSeconds] = useState();
 
   let interval;
 
   const startTimer = () => {
-    const countDownDate = new Date("May 30,2023 ").getTime();
+    const countDownDate = new Date("2023-03-21").getTime();
 
     interval = setInterval(() => {
       const now = new Date().getTime();
@@ -18,22 +15,11 @@ export function Mains() {
       const distance = countDownDate - now;
 
       const days = Math.floor(distance / (24 * 60 * 60 * 1000));
-      const hours = Math.floor(
-        (distance % (24 * 60 * 60 * 1000)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor((distance % (60 * 60 * 1000)) / (1000 * 60));
-      const seconds = Math.floor((distance % (60 * 1000)) / 1000);
 
       if (distance < 0) {
-        // Stop Timer
-
         clearInterval(interval.current);
       } else {
-        // Update Timer
         setTimerDays(days);
-        setTimerHours(hours);
-        setTimerMinutes(minutes);
-        setTimerSeconds(seconds);
       }
     });
   };
@@ -43,13 +29,8 @@ export function Mains() {
   });
 
   return (
-    <div className="App">
-      <Clock
-        timerDays={timerDays}
-        timerHours={timerHours}
-        timerMinutes={timerMinutes}
-        timerSeconds={timerSeconds}
-      />
+    <div>
+      <Clock timerDays={timerDays} />
     </div>
   );
 }

@@ -22,9 +22,7 @@ const Documents = () => {
   }, []);
 
   const handleDownload = async () => {
-    const { data, error } = await supabase.storage
-      .from("images")
-      .download("farmerPage.png"); //dodaje jednego a chce wszystkie
+    const { data, error } = await supabase.storage.from("images").download(); //dodaje jednego a chce wszystkie
     if (data) {
       setFiles(data);
     } else if (error) console.log(error);
@@ -48,30 +46,12 @@ const Documents = () => {
           <button>Dodaj dokument</button>
         </form>
 
-        <table className={styleDocuments.documents__table}>
-          <thead className={styleDocuments.documents__thead}>
-            <tr>
-              <th>Lp.</th>
-              <th>Nazwa pliku</th>
-              <th>Data utworzenia</th>
-              <th>Typ pliku</th>
-              <th>Rozmiar pliku</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              {/* {Array.isArray(files)
+        {/* {Array.isArray(files)
                 ? files.map((type) => {
                     <td>{type.type}</td>;
                   })
                 : null} */}
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+
         <TableFiles />
       </div>
     </Layout>

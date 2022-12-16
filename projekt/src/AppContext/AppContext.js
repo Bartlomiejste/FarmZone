@@ -1,29 +1,16 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { supabase } from "../../../projekt/src/supabase/config";
+import { useNavigate } from "react-router-dom";
 
 export const AppContext = createContext(undefined);
 
 export const AppContextProvider = ({ children }) => {
   const [visible, setVisible] = useState(true);
-  const [isUserLogged, setIsUserLogged] = useState(false);
+  const [isUserLogged, setIsUserLogged] = useState(() => {
+    return JSON.parse(localStorage.getItem("userLogged"));
+  });
   const [isDarkTheme, setIsDarkTheme] = useState(false);
-  const [errorForm, setErrorForm] = useState(null);
-
-  useEffect(() => {
-    getUserLogin();
-  }, []);
-
-  const getUserLogin = () => {
-    let { data: User, error } = supabase.from("User").select("*");
-    if (error) {
-      setErrorForm("Błąd");
-      console.log(error);
-    }
-    if (User) {
-      setIsUserLogged(User);
-      setErrorForm(null);
-    }
-  };
+  const navigate = useNavigate();
 
   const handleToggle = () => {
     setVisible(!visible);
@@ -34,11 +21,14 @@ export const AppContextProvider = ({ children }) => {
   };
 
   const login = () => {
-    setIsUserLogged(!isUserLogged);
+    setIsUserLogged(true);
+    localStorage.setItem("userLogged", true);
   };
 
   const logout = () => {
-    setIsUserLogged(isUserLogged);
+    setIsUserLogged(false);
+    localStorage.setItem("userLogged", false);
+    navigate("/");
   };
 
   return (
@@ -48,11 +38,9 @@ export const AppContextProvider = ({ children }) => {
         visible,
         set: darkMode,
         isDarkTheme,
-
-        toLogin: login,
+        login,
         isUserLogged,
-
-        toLogout: logout,
+        logout,
       }}
     >
       {children}

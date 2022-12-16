@@ -19,7 +19,6 @@ import { SingleMachine } from "./SingleMachine";
 
 export default function Home() {
   const { isDarkTheme } = useContext(AppContext);
-  const { isUserLogged } = useContext(AppContext);
   const [rowname, setRowName] = useState([]);
   const [formError, setFormError] = useState(null);
 

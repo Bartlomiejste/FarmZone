@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styleContact from "../Contact/Contact.module.css";
 import { Layout } from "../../Layout/Layout";
 import { useContext } from "react";
@@ -41,6 +41,11 @@ const Contact = () => {
     });
   };
 
+  const initialValues = {
+    Name: "",
+    Email: "",
+    Message: "",
+  };
   return (
     <>
       <Formik
@@ -50,7 +55,7 @@ const Contact = () => {
           Message: "",
         }}
         validationSchema={SignupSchema}
-        onSubmit={async (values) => {
+        onSubmit={async (values, { resetForm }) => {
           const { data: Contact, error } = await supabase
             .from("Contact")
             .insert([
@@ -69,7 +74,7 @@ const Contact = () => {
           if (Contact) {
             setContacts(Contact);
           }
-          window.location.reload();
+          resetForm(initialValues);
         }}
       >
         {({ handleSubmit, handleChange, handleBlur, values }) => (

@@ -4,6 +4,7 @@ export const SignupSchema = yup.object().shape({
   Login: yup
     .string()
     .min(2, "Too Short!")
+    .matches("Admin")
     .max(50, "Too Long!")
     .required("Required"),
   Password: yup

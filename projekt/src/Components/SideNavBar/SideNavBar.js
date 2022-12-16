@@ -10,7 +10,6 @@ import HomeIcon from "@mui/icons-material/Home";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
 import Avatar from "@mui/material/Avatar";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
@@ -43,11 +42,6 @@ export const SideNavBar = () => {
       path: "/planowanie",
     },
     {
-      text: "Kontakt i pomoc",
-      icon: <ContactMailIcon />,
-      path: "/kontakt",
-    },
-    {
       text: "Najnowsze informacje",
       icon: <ImportContactsIcon />,
       path: "/informacje",
@@ -57,12 +51,17 @@ export const SideNavBar = () => {
       icon: <FolderIcon />,
       path: "/dokumenty",
     },
+    {
+      text: "Kontakt i pomoc",
+      icon: <ContactMailIcon />,
+      path: "/kontakt",
+    },
   ]);
   const { visible } = useContext(AppContext);
   const { change } = useContext(AppContext);
   const { isDarkTheme } = useContext(AppContext);
 
-  const { userLogOut } = useContext(AppContext);
+  const { logout } = useContext(AppContext);
 
   return (
     <Suspense
@@ -95,13 +94,13 @@ export const SideNavBar = () => {
           }`}
         >
           <Avatar src="/broken-image.jpg" sx={{ width: 56, height: 56 }} />
-          {visible ? <p>Nazwa użytkownika</p> : null}
+          {visible ? <p>Admin</p> : null}
         </div>
         <div
           className={`${style.menu__logout} ${
             visible ? style.menu__logout : style.menu__logout_min
           }`}
-          onClick={userLogOut}
+          onClick={logout}
         >
           <LogoutIcon />
           {visible ? <p>Wyloguj</p> : null}
