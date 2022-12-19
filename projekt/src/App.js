@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // lazy lodaing Suspense
 import LoginPage from "./Components/pages/LoginPage/LoginPage";
 import Analysis from "./Components/pages/Analysis/Analysis";
-import Map from "./Components/pages/Map/Map";
+import Map from "./Components/pages/Map/Weather";
 import Main from "./Components/pages/Main/Main";
 import Planning from "./Components/pages/Planning/Planning";
 import Contact from "./Components/pages/Contact/Contact";
@@ -25,7 +25,7 @@ function App() {
 
               <Route path="/analiza" element={<Analysis />} />
 
-              <Route path="/mapa" element={<Map />} />
+              <Route path="/pogoda" element={<Map />} />
 
               <Route path="/planowanie" element={<Planning />} />
 

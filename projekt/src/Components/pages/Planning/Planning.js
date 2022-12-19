@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import stylePlanning from "../Planning/Planning.module.css";
 import { Layout } from "../../Layout/Layout";
-import Mains from "./Mains";
-import According from "./According";
+import AccordingOverview from "./AccordingOverview";
 import { supabase } from "../../../supabase/config";
 import TextField from "@mui/material/TextField";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-
 import { useEffect } from "react";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
@@ -59,8 +57,11 @@ const Planning = () => {
     <Layout>
       <div className={stylePlanning.planning__section}>
         <div className={stylePlanning.overview}>
-          <h1>Dodaj przegląd / planowane prace</h1>
-          <form onSubmit={createServis} className={stylePlanning.form}>
+          <p className={stylePlanning.overview__title}>Przeglądy</p>
+          <form
+            onSubmit={createServis}
+            className={stylePlanning.overview__form}
+          >
             <div>
               <label htmlFor="date">Data przeglądu: </label>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -70,6 +71,7 @@ const Planning = () => {
                   value={dates}
                   onChange={(value) => setDate(value)}
                   renderInput={(params) => <TextField {...params} />}
+                  className={stylePlanning.overview__inputDate}
                 />
               </LocalizationProvider>
             </div>
@@ -79,6 +81,7 @@ const Planning = () => {
                 type="text"
                 value={vehicleName}
                 onChange={(e) => setVehicleName(e.target.value)}
+                className={stylePlanning.overview__inputVehicleName}
               />
             </div>
             <div>
@@ -87,12 +90,15 @@ const Planning = () => {
                 type="text"
                 value={registrationNumber}
                 onChange={(e) => setRegistrationNumber(e.target.value)}
+                className={
+                  stylePlanning.overview__inputvehicleRegistrationNumber
+                }
               />
             </div>
             <button>Submit</button>
           </form>
         </div>
-        <According />
+        <AccordingOverview />
       </div>
     </Layout>
   );

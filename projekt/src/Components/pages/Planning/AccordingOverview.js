@@ -17,10 +17,9 @@ import { useState } from "react";
 import { useContext } from "react";
 import { AppContext } from "../../../AppContext/AppContext";
 import { useEffect } from "react";
-import CheckIcon from "@mui/icons-material/Check";
-import CloseIcon from "@mui/icons-material/Close";
+import Checkbox from "@mui/material/Checkbox";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+import stylePlanning from "../Planning/Planning.module.css";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -65,16 +64,53 @@ export default function CustomizedAccordions() {
   const [registrationNumber, setRegistrationNumber] = useState();
   const [dates, setDates] = useState();
   const [all, setAll] = useState([]);
-  const [isEditing, setIsEditing] = useState(false);
+
+  const [checked, setChecked] = useState({ input: false });
+  const [checkedAll, setCheckedAll] = useState(false);
+
+  const handleChecked = (e) => {
+    setChecked(e.target.checked);
+  };
+
+  const toggleCheck = (input) => {
+    setChecked((prevState) => {
+      const newState = { ...prevState };
+      newState[input] = !prevState[input];
+      return newState;
+    });
+  };
+
+  const selectAll = (value) => {
+    setCheckedAll(value);
+    setChecked((prevState) => {
+      const newState = { ...prevState };
+      for (const input in newState) {
+        newState[input] = value;
+      }
+      return newState;
+    });
+  };
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
-  useEffect(() => {
-    getData();
-  }, []);
 
-  const getData = async () => {
+  useEffect(() => {
+    let allChecked = true;
+    for (const input in checked) {
+      if (checked[input] === false) {
+        allChecked = false;
+      }
+    }
+    if (allChecked) {
+      setCheckedAll(true);
+    } else {
+      setCheckedAll(false);
+    }
+    getData();
+  }, [checked]);
+
+  const getData = async (e) => {
     let { data: Servis, error } = await supabase
       .from("Servis")
       .select(vehicleName, registrationNumber, dates);
@@ -85,11 +121,23 @@ export default function CustomizedAccordions() {
       setAll(Servis);
     }
   };
-  console.log(all);
+
+  const deleteServis = async (id) => {
+    const { data: Servis, error } = await supabase
+      .from("Servis")
+      .delete()
+      .eq("id", id);
+    if (error) throw error;
+
+    if (Servis) {
+      console.log(Servis);
+    }
+    getData();
+  };
 
   return (
     <>
-      <h1>Historia przeglądów</h1>
+      <div>Historia przeglądów</div>
 
       <Accordion
         expanded={expanded === "panel1"}
@@ -104,6 +152,15 @@ export default function CustomizedAccordions() {
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
+                    <TableCell
+                      align="left"
+                      style={{
+                        fontWeight: "bold",
+                        background: isDarkTheme ? "#000" : "#4caf4faf",
+                        color: isDarkTheme ? "#ffff" : "#000",
+                      }}
+                    ></TableCell>
+
                     <TableCell
                       align="center"
                       style={{
@@ -142,7 +199,19 @@ export default function CustomizedAccordions() {
                         color: isDarkTheme ? "#ffff" : "#000",
                       }}
                     >
-                      Edycja
+                      {/* {checked ? (
+                        <Checkbox
+                          inputProps={{ "aria-label": "controlled" }}
+                          onChange={handleChecked}
+                          checked={checked}
+                        />
+                      ) : null} */}
+
+                      <input
+                        name="inputAll"
+                        type="checkbox"
+                        onChange={(event) => selectAll(event.target.checked)}
+                      />
                     </TableCell>
                   </TableRow>
                 </TableHead>
@@ -158,6 +227,15 @@ export default function CustomizedAccordions() {
                         })
                       }
                     >
+                      <TableCell align="left">
+                        {checkedAll ? (
+                          <DeleteIcon
+                            className={stylePlanning.deleteIcon}
+                            onClick={() => deleteServis(name.id)}
+                          />
+                        ) : null}
+                      </TableCell>
+
                       <TableCell align="center">
                         <p key={id}>{name.vehicleName}</p>
                       </TableCell>
@@ -170,7 +248,21 @@ export default function CustomizedAccordions() {
                         <p key={id}>{name.dates}</p>
                       </TableCell>
 
-                      <TableCell align="left" sx={{ width: 90 }}></TableCell>
+                      <TableCell align="center" sx={{ width: 150 }}>
+                        {/* <Checkbox
+                          checked={checked.id}
+                          onChange={handleChecked}
+                          inputProps={{ "aria-label": "controlled" }}
+                        /> */}
+                        {checked ? (
+                          <input
+                            type="checkbox"
+                            name="input"
+                            onChange={() => toggleCheck("input")}
+                            checked={checked["input"]}
+                          />
+                        ) : null}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -184,10 +276,15 @@ export default function CustomizedAccordions() {
         onChange={handleChange("panel2")}
       >
         <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-          <Typography>Planowane prace</Typography>
+          <Typography>Prace</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>Planowane prace:</Typography>
+          <Typography>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
+            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
+            lacus ex, sit amet blandit leo lobortis eget.
+          </Typography>
         </AccordionDetails>
       </Accordion>
     </>

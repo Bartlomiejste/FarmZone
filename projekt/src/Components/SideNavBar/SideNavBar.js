@@ -8,7 +8,7 @@ import { DelayedFallback } from "../../ErrorBoundary/DelayedFallback";
 
 import HomeIcon from "@mui/icons-material/Home";
 import BarChartIcon from "@mui/icons-material/BarChart";
-import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
+import ThermostatIcon from "@mui/icons-material/Thermostat";
 import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
 import Avatar from "@mui/material/Avatar";
@@ -32,9 +32,9 @@ export const SideNavBar = () => {
       path: "/analiza",
     },
     {
-      text: "Mapa",
-      icon: <AddLocationAltIcon />,
-      path: "/mapa",
+      text: "Pogoda",
+      icon: <ThermostatIcon />,
+      path: "/pogoda",
     },
     {
       text: "Planowanie",

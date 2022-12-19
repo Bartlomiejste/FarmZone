@@ -2,10 +2,24 @@
     padding: 20px 35px;
 }
 
-.form {
+.overview {
     margin-top: 20px;
 }
 
+.overview__title {
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+
+
+
 .inputDate {
-    height: 200px;
+    width: 200px;
+    height: 4em;
+}
+
+.deleteIcon {
+    cursor: pointer;
+    color: blue;
 }
