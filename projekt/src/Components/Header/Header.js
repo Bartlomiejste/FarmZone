@@ -4,6 +4,7 @@ import logo from "../../images/FarmZone.png";
 import { useContext } from "react";
 import { AppContext } from "../../AppContext/AppContext";
 import Switch from "@mui/material/Switch";
+import Clock from "./Clock/Clock";
 
 const Header = () => {
   const { set } = useContext(AppContext);
@@ -22,6 +23,9 @@ const Header = () => {
         </div>
         <div>
           <img src={logo} alt="logo" className={style.header__img}></img>
+        </div>
+        <div>
+          <Clock />
         </div>
         <div className={style.header__switch}>
           <Switch

@@ -1,24 +1,28 @@
 .map__section {
     padding: 20px 35px;
-    height: 80vh;
+    height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+
 }
 
-.main__container {
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.418)), url('./images/field.png');
-    background-size: cover;
-    background-position: center;
+.weather__description {
+    text-indent: 30px;
 }
 
+
 .main__container {
-    height: 80%;
+    min-height: 60%;
     width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.418)), url('./images/field.png');
+    background-size: cover;
+    background-position: center;
 }
 
 .search {
@@ -43,11 +47,6 @@
     box-shadow: 10px 10px 5px 0px rgba(15, 15, 15, 0.404);
 }
 
-/* .weatherDescription {
-    margin-top: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-} */
 
 .city__temp {
     font-size: 4rem;
@@ -56,6 +55,11 @@
     color: #1e2432;
     text-align: center;
 }
+
+.city__temp_title {
+    font-size: 18px;
+}
+
 
 .temperature {
     font-size: 0.5em;

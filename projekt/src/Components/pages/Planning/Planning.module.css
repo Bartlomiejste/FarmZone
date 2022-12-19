@@ -12,8 +12,6 @@
 }
 
 
-
-
 .inputDate {
     width: 200px;
     height: 4em;
@@ -21,5 +19,5 @@
 
 .deleteIcon {
     cursor: pointer;
-    color: blue;
+    color: darkred;
 }

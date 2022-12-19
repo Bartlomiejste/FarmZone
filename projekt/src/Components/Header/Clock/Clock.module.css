@@ -1,0 +1,12 @@
+.clock {
+    font-size: 23px;
+    width: 120px;
+    color: var(--main-green-color);
+}
+
+.dark {
+    font-size: 23px;
+    width: 120px;
+    color: var(--darkTheme-color);
+    background: var(--darkTheme-background);
+}

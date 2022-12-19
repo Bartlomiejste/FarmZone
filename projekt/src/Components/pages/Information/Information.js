@@ -28,7 +28,7 @@ const Information = () => {
     <Layout>
       <div className={styleInformation.information__section}>
         <p className={styleInformation.information__title}>
-          Wiadomości z kraju
+          Najnowsze Informacje
         </p>
         <div className={styleInformation.information__grid}>
           <div className={styleInformation.one} onClick={() => farmerPage()}>

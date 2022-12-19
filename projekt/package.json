@@ -37,7 +37,8 @@
     "react-spinkit": "^3.0.0",
     "react-tailwindcss-datepicker": "^1.1.2",
     "web-vitals": "^2.1.4",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "clsx": "^1.2.1"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -20,6 +20,7 @@ import { useEffect } from "react";
 import Checkbox from "@mui/material/Checkbox";
 import DeleteIcon from "@mui/icons-material/Delete";
 import stylePlanning from "../Planning/Planning.module.css";
+import ServisRow from "./ServisRow";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -65,30 +66,10 @@ export default function CustomizedAccordions() {
   const [dates, setDates] = useState();
   const [all, setAll] = useState([]);
 
-  const [checked, setChecked] = useState({ input: false });
   const [checkedAll, setCheckedAll] = useState(false);
-
-  const handleChecked = (e) => {
-    setChecked(e.target.checked);
-  };
-
-  const toggleCheck = (input) => {
-    setChecked((prevState) => {
-      const newState = { ...prevState };
-      newState[input] = !prevState[input];
-      return newState;
-    });
-  };
 
   const selectAll = (value) => {
     setCheckedAll(value);
-    setChecked((prevState) => {
-      const newState = { ...prevState };
-      for (const input in newState) {
-        newState[input] = value;
-      }
-      return newState;
-    });
   };
 
   const handleChange = (panel) => (event, newExpanded) => {
@@ -96,19 +77,8 @@ export default function CustomizedAccordions() {
   };
 
   useEffect(() => {
-    let allChecked = true;
-    for (const input in checked) {
-      if (checked[input] === false) {
-        allChecked = false;
-      }
-    }
-    if (allChecked) {
-      setCheckedAll(true);
-    } else {
-      setCheckedAll(false);
-    }
     getData();
-  }, [checked]);
+  }, []);
 
   const getData = async (e) => {
     let { data: Servis, error } = await supabase
@@ -120,6 +90,23 @@ export default function CustomizedAccordions() {
     if (Servis) {
       setAll(Servis);
     }
+  };
+
+  const deleteAllSelected = async (id) => {
+    const { data: Servis, error } = await supabase
+      .from("Servis")
+      .delete()
+      .in(
+        "id",
+        all.map((el) => el.id)
+      );
+    if (error) throw error;
+
+    if (Servis) {
+      console.log(Servis);
+    }
+    setCheckedAll(false);
+    getData();
   };
 
   const deleteServis = async (id) => {
@@ -137,7 +124,7 @@ export default function CustomizedAccordions() {
 
   return (
     <>
-      <div>Historia przeglądów</div>
+      <div>Historia</div>
 
       <Accordion
         expanded={expanded === "panel1"}
@@ -159,7 +146,14 @@ export default function CustomizedAccordions() {
                         background: isDarkTheme ? "#000" : "#4caf4faf",
                         color: isDarkTheme ? "#ffff" : "#000",
                       }}
-                    ></TableCell>
+                    >
+                      {checkedAll ? (
+                        <DeleteIcon
+                          className={stylePlanning.deleteIcon}
+                          onClick={deleteAllSelected}
+                        />
+                      ) : null}
+                    </TableCell>
 
                     <TableCell
                       align="center"
@@ -189,7 +183,7 @@ export default function CustomizedAccordions() {
                         color: isDarkTheme ? "#ffff" : "#000",
                       }}
                     >
-                      Termin przeglądu
+                      Następny przegląd za:
                     </TableCell>
                     <TableCell
                       align="center"
@@ -199,71 +193,23 @@ export default function CustomizedAccordions() {
                         color: isDarkTheme ? "#ffff" : "#000",
                       }}
                     >
-                      {/* {checked ? (
-                        <Checkbox
-                          inputProps={{ "aria-label": "controlled" }}
-                          onChange={handleChecked}
-                          checked={checked}
-                        />
-                      ) : null} */}
-
                       <input
                         name="inputAll"
                         type="checkbox"
                         onChange={(event) => selectAll(event.target.checked)}
+                        checked={checkedAll}
                       />
                     </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {all.map((name, id) => (
-                    <TableRow
-                      sx={
-                        ({ "&:last-child td, &:last-child th": { border: 0 } },
-                        {
-                          "&:nth-of-type(odd)": {
-                            backgroundColor: "lightgray",
-                          },
-                        })
-                      }
-                    >
-                      <TableCell align="left">
-                        {checkedAll ? (
-                          <DeleteIcon
-                            className={stylePlanning.deleteIcon}
-                            onClick={() => deleteServis(name.id)}
-                          />
-                        ) : null}
-                      </TableCell>
-
-                      <TableCell align="center">
-                        <p key={id}>{name.vehicleName}</p>
-                      </TableCell>
-
-                      <TableCell align="center">
-                        <p key={id}>{name.registrationNumber}</p>
-                      </TableCell>
-
-                      <TableCell align="center">
-                        <p key={id}>{name.dates}</p>
-                      </TableCell>
-
-                      <TableCell align="center" sx={{ width: 150 }}>
-                        {/* <Checkbox
-                          checked={checked.id}
-                          onChange={handleChecked}
-                          inputProps={{ "aria-label": "controlled" }}
-                        /> */}
-                        {checked ? (
-                          <input
-                            type="checkbox"
-                            name="input"
-                            onChange={() => toggleCheck("input")}
-                            checked={checked["input"]}
-                          />
-                        ) : null}
-                      </TableCell>
-                    </TableRow>
+                  {all.map((row) => (
+                    <ServisRow
+                      checkedAll={checkedAll}
+                      deleteServis={deleteServis}
+                      rowData={row}
+                      key={row.id}
+                    />
                   ))}
                 </TableBody>
               </Table>

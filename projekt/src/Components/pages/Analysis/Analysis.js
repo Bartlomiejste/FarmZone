@@ -31,7 +31,6 @@ const Analysis = () => {
       console.log(error);
     }
     if (Machine) {
-      console.log("resss", Machine);
       const category = [];
       const price = [];
       const id = [];
@@ -39,8 +38,6 @@ const Analysis = () => {
         id.push(i.id);
         category.push(i.Category);
         price.push(i.Price);
-        console.log(category);
-        console.log(price);
       }
       setMachine({
         datasets: [
@@ -54,7 +51,6 @@ const Analysis = () => {
       setFormError(null);
     }
   };
-  console.log(machine);
 
   return (
     <Layout>

@@ -3,31 +3,19 @@ import stylePlanning from "../Planning/Planning.module.css";
 import { Layout } from "../../Layout/Layout";
 import AccordingOverview from "./AccordingOverview";
 import { supabase } from "../../../supabase/config";
-import TextField from "@mui/material/TextField";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { useEffect } from "react";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const Planning = () => {
   const [dates, setDate] = useState();
   const [vehicleName, setVehicleName] = useState();
   const [registrationNumber, setRegistrationNumber] = useState();
-  const [distance, setDistance] = useState();
   const [all, setAll] = useState([]);
-  const [datefromdata, setData] = useState([]);
-
-  const a = new Date(dates);
-  const bb = a.getFullYear() + "/" + (a.getMonth() + 1) + "/" + a.getDate();
-  const c = a.toDateString();
-  const d = new Date().getTime();
-  console.log(a);
 
   const createServis = async (e) => {
     e.preventDefault();
+    console.log({ vehicleName, registrationNumber, dates });
     const { data, error } = await supabase
       .from("Servis")
-      .insert([{ vehicleName, registrationNumber, dates, distance }]);
+      .insert([{ vehicleName, registrationNumber, dates }]);
     if (error) {
       throw error;
     }
@@ -36,21 +24,6 @@ const Planning = () => {
       setAll(data);
     }
     window.location.reload();
-  };
-
-  useEffect(() => {
-    createServis();
-    getdates();
-  }, []);
-
-  const getdates = async () => {
-    let { data, error } = await supabase.from("Servis").select("dates");
-    if (error) {
-      console.log(error);
-    }
-    if (data) {
-      setData(data);
-    }
   };
 
   return (
@@ -64,16 +37,11 @@ const Planning = () => {
           >
             <div>
               <label htmlFor="date">Data przeglądu: </label>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                  label=""
-                  inputFormat="YYYY/MM/DD"
-                  value={dates}
-                  onChange={(value) => setDate(value)}
-                  renderInput={(params) => <TextField {...params} />}
-                  className={stylePlanning.overview__inputDate}
-                />
-              </LocalizationProvider>
+              <input
+                type="date"
+                onChange={(e) => setDate(e.target.value)}
+                className={stylePlanning.overview__inputDate}
+              />
             </div>
             <div>
               <label htmlFor="vehicleName">Nazwa pojazdu: </label>
