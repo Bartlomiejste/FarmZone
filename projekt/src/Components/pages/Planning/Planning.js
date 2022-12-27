@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import stylePlanning from "../Planning/Planning.module.css";
 import { Layout } from "../../Layout/Layout";
-import AccordingOverview from "./AccordingOverview";
+import AccordingServis from "./AccordingServis";
 import { supabase } from "../../../supabase/config";
+import Working from "./Working";
 
 const Planning = () => {
   const [dates, setDate] = useState();
@@ -30,43 +31,47 @@ const Planning = () => {
     <Layout>
       <div className={stylePlanning.planning__section}>
         <div className={stylePlanning.overview}>
-          <p className={stylePlanning.overview__title}>Przeglądy</p>
           <form
             onSubmit={createServis}
             className={stylePlanning.overview__form}
           >
+            <p className={stylePlanning.overview__title}>Przeglądy</p>
             <div>
               <label htmlFor="date">Data przeglądu: </label>
               <input
                 type="date"
                 onChange={(e) => setDate(e.target.value)}
-                className={stylePlanning.overview__inputDate}
+                className={stylePlanning.overview__input}
+                required
               />
             </div>
             <div>
               <label htmlFor="vehicleName">Nazwa pojazdu: </label>
               <input
+                required
                 type="text"
                 value={vehicleName}
                 onChange={(e) => setVehicleName(e.target.value)}
-                className={stylePlanning.overview__inputVehicleName}
+                className={stylePlanning.overview__input}
               />
             </div>
             <div>
               <label htmlFor="registrationNumber">Nr rejestracyjny: </label>
               <input
+                required
                 type="text"
                 value={registrationNumber}
                 onChange={(e) => setRegistrationNumber(e.target.value)}
-                className={
-                  stylePlanning.overview__inputvehicleRegistrationNumber
-                }
+                className={stylePlanning.overview__input}
               />
             </div>
-            <button>Submit</button>
+            <button className={stylePlanning.overview__btn}>
+              Dodaj przegląd
+            </button>
           </form>
+          <Working />
         </div>
-        <AccordingOverview />
+        <AccordingServis />
       </div>
     </Layout>
   );

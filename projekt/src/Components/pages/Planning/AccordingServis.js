@@ -17,10 +17,10 @@ import { useState } from "react";
 import { useContext } from "react";
 import { AppContext } from "../../../AppContext/AppContext";
 import { useEffect } from "react";
-import Checkbox from "@mui/material/Checkbox";
 import DeleteIcon from "@mui/icons-material/Delete";
 import stylePlanning from "../Planning/Planning.module.css";
 import ServisRow from "./ServisRow";
+import WorkingTable from "./WorkingTable";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -124,12 +124,9 @@ export default function CustomizedAccordions() {
 
   return (
     <>
-      <div>Historia</div>
+      <div className={stylePlanning.table__title}>Historia</div>
 
-      <Accordion
-        expanded={expanded === "panel1"}
-        onChange={handleChange("panel1")}
-      >
+      <Accordion onChange={handleChange("panel1")}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
           <Typography>Przeglądy</Typography>
         </AccordionSummary>
@@ -226,10 +223,7 @@ export default function CustomizedAccordions() {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
+            <WorkingTable />
           </Typography>
         </AccordionDetails>
       </Accordion>

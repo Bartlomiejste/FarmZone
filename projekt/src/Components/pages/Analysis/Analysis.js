@@ -5,6 +5,8 @@ import styleAnalysis from "../Analysis/Analysis.module.css";
 import { Layout } from "../../Layout/Layout";
 import { Chart as ChartJs, Tooltip, Title, ArcElement, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+import Failures from "./Failures";
+import Crops from "./Crops";
 ChartJs.register(Tooltip, Title, ArcElement, Legend);
 
 const Analysis = () => {
@@ -55,6 +57,8 @@ const Analysis = () => {
   return (
     <Layout>
       <div className={styleAnalysis.analysis__section}>
+        <Failures />
+        <Crops />
         <div
           className={styleAnalysis.analysis__pie}
           style={{ width: "20%", height: "20%" }}

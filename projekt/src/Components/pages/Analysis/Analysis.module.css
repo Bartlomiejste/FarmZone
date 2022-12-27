@@ -5,3 +5,36 @@
 .analysis__pie {
     margin: 50px;
 }
+
+.title {
+    font-weight: 700;
+    margin: 20px 0;
+    font-size: 26px;
+}
+
+.input {
+    width: 200px;
+    text-align: center;
+    padding: 5px;
+    margin: 10px;
+    border: none;
+    outline: none;
+}
+
+.btn {
+    padding: 15px;
+    width: 180px;
+    border: none;
+    font-size: 18px;
+    background: #F0F0F0;
+    color: #000000;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3 linear;
+    margin-bottom: 50px;
+
+}
+
+.btn:hover {
+    background: #4caf4faf;
+}

@@ -2,8 +2,17 @@
     padding: 20px 35px;
 }
 
+.table__title {
+    margin: 20px;
+    font-size: 26px;
+    font-weight: 500;
+}
+
 .overview {
     margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .overview__title {
@@ -12,12 +21,34 @@
 }
 
 
-.inputDate {
-    width: 200px;
-    height: 4em;
-}
-
 .deleteIcon {
     cursor: pointer;
-    color: darkred;
+    color: #8b0000;
+}
+
+.overview__input {
+    width: 200px;
+    text-align: center;
+    padding: 5px;
+    margin: 10px;
+    border: none;
+    outline: none;
+}
+
+.overview__btn {
+    padding: 15px;
+    width: 180px;
+    border: none;
+    font-size: 18px;
+    background: #F0F0F0;
+    color: #000000;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3 linear;
+    margin-bottom: 50px;
+
+}
+
+.overview__btn:hover {
+    background: #4caf4faf;
 }
