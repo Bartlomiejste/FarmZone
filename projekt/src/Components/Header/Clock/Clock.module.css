@@ -1,12 +1,21 @@
 .clock {
-    font-size: 23px;
+    font-size: 18px;
     width: 120px;
     color: var(--main-green-color);
 }
 
 .dark {
-    font-size: 23px;
     width: 120px;
     color: var(--darkTheme-color);
     background: var(--darkTheme-background);
+}
+
+@media only screen and (max-width: 600px) {
+    .clock {
+        font-size: 12px;
+    }
+
+    .dark {
+        font-size: 12px;
+    }
 }

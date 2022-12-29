@@ -10,6 +10,10 @@
     font-weight: 500;
 }
 
+.header__name_title {
+    font-size: 16px;
+}
+
 .header__name_navName {
     margin-top: 5px;
     font-size: 25px;
@@ -25,11 +29,6 @@
     height: auto;
 }
 
-.header__switch {
-    margin: -20px;
-    align-self: flex-start;
-
-}
 
 /* ciemny styl */
 
@@ -37,3 +36,25 @@
     color: var(--darkTheme-color);
     background: var(--darkTheme-background);
 }
+
+@media only screen and (max-width: 600px) {
+    .header {
+        padding: 20px;
+    }
+
+    .header__name_title {
+        font-size: 12px;
+    }
+
+    .header__name_navName {
+        font-size: 16px;
+    }
+
+    .header__img {
+        margin-left: 30px;
+        width: 60%;
+    }
+
+}
+
+@media only screen and (max-width: 768px) {}

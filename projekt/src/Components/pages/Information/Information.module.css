@@ -119,3 +119,22 @@
     transform: scale(1.5);
     z-index: 0;
 }
+
+@media only screen and (max-width: 600px) {
+    .information__title {
+        font-size: 13px;
+    }
+
+    .information__grid {
+        grid-template-columns: 150px;
+        grid-template-rows: 150px 150px 150px 150px 150px 150px;
+        grid-template-areas:
+            "a"
+            "b"
+            "c"
+            "d"
+            "e"
+            "f";
+        gap: 5px;
+    }
+}

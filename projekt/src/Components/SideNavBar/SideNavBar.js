@@ -93,8 +93,8 @@ export const SideNavBar = () => {
             visible ? style.menu__avatar : null
           }`}
         >
-          <Avatar src="/broken-image.jpg" sx={{ width: 56, height: 56 }} />
-          {visible ? <p>Admin</p> : null}
+          <Avatar src="/broken-image.jpg" className={style.avatarimg} />
+          {visible ? <p className={style.nameuser}>Admin</p> : null}
         </div>
         <div
           className={`${style.menu__logout} ${
@@ -103,7 +103,7 @@ export const SideNavBar = () => {
           onClick={logout}
         >
           <LogoutIcon />
-          {visible ? <p>Wyloguj</p> : null}
+          {visible ? <p className={style.logutname}>Wyloguj</p> : null}
         </div>
 
         <div
@@ -123,7 +123,9 @@ export const SideNavBar = () => {
             >
               <MenuItem style={{ background: "transparent" }}>
                 <div className={style.menu__navigation_icon}>{icon}</div>
-                <div>{visible ? text : null}</div>
+                <div className={style.textMenuItem}>
+                  {visible ? text : null}
+                </div>
               </MenuItem>
             </Link>
           ))}

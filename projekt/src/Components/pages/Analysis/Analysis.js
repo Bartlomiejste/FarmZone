@@ -7,63 +7,34 @@ import { Chart as ChartJs, Tooltip, Title, ArcElement, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import Failures from "./Failures";
 import Crops from "./Crops";
+import FailuresTable from "./FailuresTable";
+import CropsTable from "./CropsTable";
+import CropsPie from "./CropsPie";
+import MachinePie from "./MachinePie";
 ChartJs.register(Tooltip, Title, ArcElement, Legend);
 
 const Analysis = () => {
-  const [machine, setMachine] = useState({
-    datasets: [
-      {
-        data: "",
-        backgroundColor: "",
-      },
-    ],
-    labels: "",
-  });
-
-  const [errors, setFormError] = useState();
-
-  useEffect(() => {
-    getMachines();
-  }, []);
-
-  const getMachines = async () => {
-    let { data: Machine, error } = await supabase.from("Machine").select("*");
-    if (error) {
-      setFormError(null);
-      console.log(error);
-    }
-    if (Machine) {
-      const category = [];
-      const price = [];
-      const id = [];
-      for (const i of Machine) {
-        id.push(i.id);
-        category.push(i.Category);
-        price.push(i.Price);
-      }
-      setMachine({
-        datasets: [
-          {
-            data: price,
-            backgroundColor: ["Silver", "Purple", "Orange"],
-          },
-        ],
-        labels: category,
-      });
-      setFormError(null);
-    }
-  };
-
   return (
     <Layout>
       <div className={styleAnalysis.analysis__section}>
-        <Failures />
-        <Crops />
-        <div
-          className={styleAnalysis.analysis__pie}
-          style={{ width: "20%", height: "20%" }}
-        >
-          <Doughnut data={machine} />
+        <div className={styleAnalysis.formStyle}>
+          <div>
+            <Failures />
+          </div>
+          <div className={styleAnalysis.table}>
+            <FailuresTable />
+          </div>
+
+          <div>
+            <Crops />
+          </div>
+          <div className={styleAnalysis.table}>
+            <CropsTable />
+          </div>
+        </div>
+        <div className={styleAnalysis.pie}>
+          <MachinePie />
+          <CropsPie />
         </div>
       </div>
     </Layout>

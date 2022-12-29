@@ -105,3 +105,30 @@
     margin-top: -15px;
     color: red;
 }
+
+@media only screen and (max-width: 600px) {
+
+    .form__label,
+    .form__title,
+    .form__name,
+    .form__email,
+    .form__message {
+        font-size: 13px;
+    }
+
+    .form__name,
+    .form__email,
+    .form__message {
+        padding: 7px;
+    }
+
+    .form__message {
+        min-width: 265px;
+    }
+
+    .form__button {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+}

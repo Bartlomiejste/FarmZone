@@ -26,12 +26,11 @@ const Header = () => {
         </div>
         <div>
           <Clock />
-        </div>
-        <div className={style.header__switch}>
           <Switch
             checked={isDarkTheme}
             onChange={set}
             inputProps={{ "aria-label": "controlled" }}
+            className={style.header__switch}
           />
         </div>
       </div>

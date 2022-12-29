@@ -4,7 +4,7 @@ import { useState } from "react";
 import { supabase } from "../../../supabase/config";
 import { useEffect } from "react";
 
-const Failures = () => {
+const Damages = () => {
   const [cost, setCost] = useState();
   const [damageelement, setDamageElement] = useState();
   const [damage, setDamage] = useState([]);
@@ -56,6 +56,7 @@ const Failures = () => {
             className={styleAnalysis.input}
             required
           />
+          <p>{additionalDamage}</p>
         </div>
         <div>
           <label htmlFor="damageelement">Uszkodzony element</label>
@@ -72,4 +73,4 @@ const Failures = () => {
   );
 };
 
-export default Failures;
+export default Damages;

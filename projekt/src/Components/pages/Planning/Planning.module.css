@@ -52,3 +52,25 @@
 .overview__btn:hover {
     background: #4caf4faf;
 }
+
+@media only screen and (max-width: 600px) {
+
+    .overview {
+        flex-direction: column;
+        font-size: 13px;
+    }
+
+    .table__title,
+    .overview__title,
+    .overview__btn,
+    .overview__input,
+    .overview__form,
+    label {
+        font-size: 13px;
+    }
+
+    .overview__btn {
+        padding: 10px;
+    }
+
+}

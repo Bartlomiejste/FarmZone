@@ -40,6 +40,11 @@
     transition: 0.5s linear;
 }
 
+.avatarimg {
+    height: 45px;
+    width: 45px;
+}
+
 .menu__logout {
     display: flex;
     align-items: center;
@@ -48,7 +53,6 @@
     height: 60px;
     background-color: #000000;
     color: #ffffff;
-    padding: 0 80px;
     cursor: pointer;
     border-bottom: 1px solid lightgray;
     transition: 0.5s linear;
@@ -138,4 +142,36 @@
 .dark {
     color: var(--darkTheme-color);
     background: var(--darkTheme-background);
+}
+
+
+@media only screen and (max-width: 600px) {
+
+    .menu__arrow,
+    .nameuser,
+    .logutname,
+    .textMenuItem {
+        display: none;
+    }
+
+    .menu__avatar {
+        height: 155px;
+        width: 50px;
+        margin: 0 auto;
+    }
+
+    .menu__navigation_icon {
+        font-size: 20px;
+    }
+
+    .menu__navigation_footer {
+        font-size: 5px;
+    }
+
+    .menu__navigation_link {
+        width: 175%;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 0;
+    }
 }

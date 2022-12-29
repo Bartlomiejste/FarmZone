@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,7 +6,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
 import AddMachine from "./AddMachine";
 import style from "../Home/Home.module.css";
 import { useState } from "react";
@@ -21,9 +19,13 @@ export default function Home() {
   const { isDarkTheme } = useContext(AppContext);
   const [rowname, setRowName] = useState([]);
   const [formError, setFormError] = useState(null);
+  const [damage, setDamage] = useState([]);
+  const [crops, setCrops] = useState([]);
 
   useEffect(() => {
     getMachines();
+    getDamage();
+    getCrops();
   }, []);
 
   const getMachines = async () => {
@@ -44,6 +46,48 @@ export default function Home() {
     buyDevice -= price.Price;
   }
 
+  const getDamage = async () => {
+    let { data: Damage, error } = await supabase.from("Damage").select("*");
+    if (error) {
+      console.log(error);
+    }
+    if (Damage) {
+      setDamage(Damage);
+    }
+  };
+
+  let additionalDamage = 0;
+  damage.forEach(functionDamage);
+  function functionDamage(cost) {
+    additionalDamage -= cost.cost;
+  }
+
+  const getCrops = async () => {
+    let { data: Crops, error } = await supabase.from("Crops").select("*");
+    if (error) {
+      console.log(error);
+    }
+    if (Crops) {
+      setCrops(Crops);
+    }
+  };
+
+  let multiplyCrop = crops.map((item) => item.pricecrops * item.quantitycrops);
+
+  let additionalCrops = 0;
+  multiplyCrop.forEach(functionCrop);
+  function functionCrop(multiplyCrop) {
+    additionalCrops += multiplyCrop;
+  }
+
+  let summary = 0;
+  rowname.forEach(functionBalance);
+  damage.forEach(functionBalance);
+  multiplyCrop.forEach(functionBalance);
+  function functionBalance() {
+    summary = additionalCrops + additionalDamage + buyDevice;
+  }
+
   return (
     <>
       <div className={style.home__section}>
@@ -51,16 +95,18 @@ export default function Home() {
           <p style={{ fontWeight: "bold" }}>Ogólne podsumowanie:</p>
           <p>
             Saldo:
-            <span className={style.darkgreen}>2600</span>
+            <span className={style.darkgreen}>{summary} zł</span>
           </p>
           <p>
-            Zakup maszyn:<span className={style.yellow}> {buyDevice}</span>
+            Zakup maszyn:<span className={style.yellow}>{buyDevice} zł</span>
           </p>
           <p>
-            Awarie:<span className={style.red}> -2000</span>
+            Awarie:
+            <span className={style.red}>{additionalDamage} zł</span>
           </p>
           <p>
-            Zebrane plony:<span className={style.green}> +40000</span>
+            Zebrane plony:
+            <span className={style.green}>{additionalCrops} zł</span>
           </p>
         </div>
         <AddMachine />

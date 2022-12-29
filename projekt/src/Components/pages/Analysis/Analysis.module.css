@@ -2,8 +2,11 @@
     padding: 20px 35px;
 }
 
-.analysis__pie {
-    margin: 50px;
+.pie {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .title {
@@ -37,4 +40,20 @@
 
 .btn:hover {
     background: #4caf4faf;
+}
+
+
+
+.formStyle {
+    display: grid;
+    grid-template-columns: 500px 500px;
+    grid-template-rows: 300px 400px;
+    grid-template-areas: "a b"
+        "c d";
+    justify-content: space-evenly;
+}
+
+.table {
+    width: 110%;
+    margin: 20px 0px
 }
