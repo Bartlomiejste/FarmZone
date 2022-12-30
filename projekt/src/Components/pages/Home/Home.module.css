@@ -49,7 +49,6 @@
     width: 100%;
     height: auto;
     margin: 50px 0px;
-    font-size: 18px;
 }
 
 .form__option {
@@ -57,7 +56,6 @@
     height: 50px;
     width: 180px;
     text-align: center;
-    font-size: 18px;
     border: none;
 }
 
@@ -69,7 +67,6 @@
     padding: 15px;
     width: 180px;
     border: none;
-    font-size: 18px;
     background: #F0F0F0;
     color: #000000;
     font-weight: 500;
@@ -110,21 +107,44 @@
     height: 25px;
 }
 
-@media only screen and (max-width: 600px) {
+@media screen and (min-width: 320px) and (max-width: 720px) {
 
     .home__information,
     .darkgreen,
     .yellow,
     .red,
-    .green {
+    .green,
+    .form__error {
         font-size: 14px;
     }
 
-    .form__option,
+    .form__option {
+        height: 40px;
+        font-size: 14px;
+        width: 170px;
+    }
+
     .form__btn {
-        height: 50px;
-        width: 180px;
+        font-size: 14px;
+        width: 170px;
+    }
+
+    .form__container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media only screen and (min-width: 721px) {
+    .form__container {
+        display: block;
+    }
+
+    .form__option {
         font-size: 16px;
-        border: none;
+    }
+
+    .form__btn {
+        font-size: 16px;
     }
 }

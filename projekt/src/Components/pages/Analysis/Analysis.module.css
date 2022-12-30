@@ -5,6 +5,7 @@
 .pie {
     display: flex;
     width: 100%;
+    height: 100%;
     align-items: center;
     justify-content: space-evenly;
 }
@@ -34,15 +35,11 @@
     font-weight: 500;
     cursor: pointer;
     transition: 0.3 linear;
-    margin-bottom: 50px;
-
 }
 
 .btn:hover {
     background: #4caf4faf;
 }
-
-
 
 .formStyle {
     display: grid;
@@ -56,4 +53,39 @@
 .table {
     width: 110%;
     margin: 20px 0px
+}
+
+@media only screen and (min-width: 320px) and (max-width: 1440px) {
+    .analysis__section {
+        padding: 20px 10px;
+    }
+
+    .title {
+        margin: 10px 0;
+        font-size: 12px;
+    }
+
+    .btn {
+        padding: 8px;
+        width: 180px;
+        font-size: 12px;
+    }
+
+    .formStyle {
+        display: grid;
+        grid-template-columns: 200px;
+        grid-template-rows: 300px;
+        grid-template-areas: "a"
+            "b"
+            "c"
+            "d";
+    }
+
+    .pie {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: space-evenly;
+    }
 }

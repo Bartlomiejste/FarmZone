@@ -125,7 +125,6 @@ export default function CustomizedAccordions() {
   return (
     <>
       <div className={stylePlanning.table__title}>Historia</div>
-
       <Accordion onChange={handleChange("panel1")}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
           <Typography>Przeglądy</Typography>

@@ -26,7 +26,7 @@ const Working = () => {
   return (
     <>
       <form onSubmit={createWork} className={stylePlanning.overview__form}>
-        <p className={stylePlanning.overview__title}>Planowanie prac</p>
+        <div className={stylePlanning.overview__title}>Planowanie prac</div>
         <div>
           <label htmlFor="scheduledstartdate">Data planowanej pracy: </label>
           <input

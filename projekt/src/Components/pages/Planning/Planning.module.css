@@ -53,7 +53,10 @@
     background: #4caf4faf;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (min-width: 320px) and (max-width: 835px) {
+    .planning__section {
+        padding: 20px 10px;
+    }
 
     .overview {
         flex-direction: column;

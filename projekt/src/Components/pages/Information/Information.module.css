@@ -120,13 +120,32 @@
     z-index: 0;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (min-width: 320px) and (max-width: 720px) {
     .information__title {
         font-size: 13px;
     }
 
     .information__grid {
         grid-template-columns: 150px;
+        grid-template-rows: 150px 150px 150px 150px 150px 150px;
+        grid-template-areas:
+            "a"
+            "b"
+            "c"
+            "d"
+            "e"
+            "f";
+        gap: 5px;
+    }
+}
+
+@media only screen and (min-width: 721px) and (max-width: 1400px) {
+    .information__title {
+        font-size: 22px;
+    }
+
+    .information__grid {
+        grid-template-columns: 350px;
         grid-template-rows: 150px 150px 150px 150px 150px 150px;
         grid-template-areas:
             "a"

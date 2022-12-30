@@ -1,10 +1,7 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { supabase } from "../../../supabase/config";
 import styleAnalysis from "../Analysis/Analysis.module.css";
 import { Layout } from "../../Layout/Layout";
 import { Chart as ChartJs, Tooltip, Title, ArcElement, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
 import Failures from "./Failures";
 import Crops from "./Crops";
 import FailuresTable from "./FailuresTable";

@@ -1,10 +1,9 @@
-/* style do headera */
+/* style header */
 .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 131px;
     padding: 35px;
     background-color: #ffffff;
     font-weight: 500;
@@ -30,20 +29,21 @@
 }
 
 
-/* ciemny styl */
+/* dark style */
 
 .dark {
     color: var(--darkTheme-color);
     background: var(--darkTheme-background);
 }
 
-@media only screen and (max-width: 600px) {
+@media screen and (min-width: 320px) and (max-width: 720px) {
     .header {
-        padding: 20px;
+        padding: 15px;
+        height: 103px;
     }
 
     .header__name_title {
-        font-size: 12px;
+        font-size: 13px;
     }
 
     .header__name_navName {
@@ -51,10 +51,26 @@
     }
 
     .header__img {
-        margin-left: 30px;
-        width: 60%;
+        display: none;
     }
 
 }
 
-@media only screen and (max-width: 768px) {}
+@media only screen and (min-width: 1440) {
+    .header {
+        padding: 15px;
+        justify-content: space-evenly;
+    }
+
+    .header__name_title {
+        font-size: 13px;
+    }
+
+    .header__name_navName {
+        font-size: 16px;
+    }
+
+    .header__img {
+        display: none;
+    }
+}

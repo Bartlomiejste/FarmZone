@@ -179,10 +179,11 @@ const Contact = () => {
                     href={linkedinUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    className={styleContact.linkedin}
                   >
                     <LinkedInIcon
                       style={{
-                        fontSize: "80px",
+                        fontSize: "60px",
                         color: "#000",
                         cursor: "pointer",
                       }}
@@ -191,7 +192,7 @@ const Contact = () => {
                   <a href={gitHubUrl} target="_blank" rel="noopener noreferrer">
                     <GitHubIcon
                       style={{
-                        fontSize: "80px",
+                        fontSize: "60px",
                         color: "#000",
                         cursor: "pointer",
                       }}
@@ -199,7 +200,7 @@ const Contact = () => {
                   </a>
 
                   <PictureAsPdfIcon
-                    style={{ fontSize: "80px", cursor: "pointer" }}
+                    style={{ fontSize: "60px", cursor: "pointer" }}
                     onClick={downloadCV}
                   />
                 </div>

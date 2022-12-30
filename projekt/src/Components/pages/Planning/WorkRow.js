@@ -13,38 +13,40 @@ const ServisRow = ({ checkedAll, deleteServis, rowData: rowWork }) => {
   };
 
   return (
-    <TableRow
-      sx={
-        ({ "&:last-child td, &:last-child th": { border: 0 } },
-        {
-          "&:nth-of-type(odd)": {
-            backgroundColor: "lightgray",
-          },
-        })
-      }
-    >
-      <TableCell align="left">
-        {checked || checkedAll ? (
-          <DeleteIcon
-            className={stylePlanning.deleteIcon}
-            onClick={() => deleteServis(rowWork.id)}
+    <>
+      <TableRow
+        sx={
+          ({ "&:last-child td, &:last-child th": { border: 0 } },
+          {
+            "&:nth-of-type(odd)": {
+              backgroundColor: "lightgray",
+            },
+          })
+        }
+      >
+        <TableCell align="left">
+          {checked || checkedAll ? (
+            <DeleteIcon
+              className={stylePlanning.deleteIcon}
+              onClick={() => deleteServis(rowWork.id)}
+            />
+          ) : null}
+        </TableCell>
+
+        <TableCell align="center">{rowWork.typeofwork}</TableCell>
+        <TableCell align="center">{rowWork.numberoffield}</TableCell>
+        <TableCell align="center">{rowWork.scheduledstartdate}</TableCell>
+
+        <TableCell align="center" sx={{ width: 150 }}>
+          <input
+            type="checkbox"
+            name="input"
+            onChange={toggleCheck}
+            checked={checked || checkedAll}
           />
-        ) : null}
-      </TableCell>
-
-      <TableCell align="center">{rowWork.typeofwork}</TableCell>
-      <TableCell align="center">{rowWork.numberoffield}</TableCell>
-      <TableCell align="center">{rowWork.scheduledstartdate}</TableCell>
-
-      <TableCell align="center" sx={{ width: 150 }}>
-        <input
-          type="checkbox"
-          name="input"
-          onChange={toggleCheck}
-          checked={checked || checkedAll}
-        />
-      </TableCell>
-    </TableRow>
+        </TableCell>
+      </TableRow>
+    </>
   );
 };
 

@@ -28,52 +28,54 @@ const Planning = () => {
   };
 
   return (
-    <Layout>
-      <div className={stylePlanning.planning__section}>
-        <div className={stylePlanning.overview}>
-          <form
-            onSubmit={createServis}
-            className={stylePlanning.overview__form}
-          >
-            <p className={stylePlanning.overview__title}>Przeglądy</p>
-            <div>
-              <label htmlFor="date">Data przeglądu: </label>
-              <input
-                type="date"
-                onChange={(e) => setDate(e.target.value)}
-                className={stylePlanning.overview__input}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="vehicleName">Nazwa pojazdu: </label>
-              <input
-                required
-                type="text"
-                value={vehicleName}
-                onChange={(e) => setVehicleName(e.target.value)}
-                className={stylePlanning.overview__input}
-              />
-            </div>
-            <div>
-              <label htmlFor="registrationNumber">Nr rejestracyjny: </label>
-              <input
-                required
-                type="text"
-                value={registrationNumber}
-                onChange={(e) => setRegistrationNumber(e.target.value)}
-                className={stylePlanning.overview__input}
-              />
-            </div>
-            <button className={stylePlanning.overview__btn}>
-              Dodaj przegląd
-            </button>
-          </form>
-          <Working />
+    <>
+      <Layout>
+        <div className={stylePlanning.planning__section}>
+          <div className={stylePlanning.overview}>
+            <form
+              onSubmit={createServis}
+              className={stylePlanning.overview__form}
+            >
+              <div className={stylePlanning.overview__title}>Przeglądy</div>
+              <div>
+                <label htmlFor="date">Data przeglądu: </label>
+                <input
+                  type="date"
+                  onChange={(e) => setDate(e.target.value)}
+                  className={stylePlanning.overview__input}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="vehicleName">Nazwa pojazdu: </label>
+                <input
+                  required
+                  type="text"
+                  value={vehicleName}
+                  onChange={(e) => setVehicleName(e.target.value)}
+                  className={stylePlanning.overview__input}
+                />
+              </div>
+              <div>
+                <label htmlFor="registrationNumber">Nr rejestracyjny: </label>
+                <input
+                  required
+                  type="text"
+                  value={registrationNumber}
+                  onChange={(e) => setRegistrationNumber(e.target.value)}
+                  className={stylePlanning.overview__input}
+                />
+              </div>
+              <button className={stylePlanning.overview__btn}>
+                Dodaj przegląd
+              </button>
+            </form>
+            <Working />
+          </div>
+          <AccordingServis />
         </div>
-        <AccordingServis />
-      </div>
-    </Layout>
+      </Layout>
+    </>
   );
 };
 
