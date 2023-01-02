@@ -29,9 +29,14 @@ const Analysis = () => {
             <CropsTable />
           </div>
         </div>
-        <div className={styleAnalysis.pie}>
-          <MachinePie />
-          <CropsPie />
+        <div>
+          <div className={styleAnalysis.titleProcentage}>
+            Podsumowanie procentowe:
+          </div>
+          <div className={styleAnalysis.pie}>
+            <MachinePie />
+            <CropsPie />
+          </div>
         </div>
       </div>
     </Layout>

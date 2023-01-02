@@ -21,32 +21,38 @@ import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
+import { supabase } from "../../../supabase/config";
+import { useState } from "react";
+import { useEffect } from "react";
+import { saveAs } from "file-saver";
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
+import { useContext } from "react";
+import { AppContext } from "../../../AppContext/AppContext";
+// function createData(id, NazwaPliku, DataUtworzenia, TypPliku, RozmiarPliku) {
+//   return {
+//     id,
+//     NazwaPliku,
+//     DataUtworzenia,
+//     TypPliku,
+//     RozmiarPliku,
+//   };
+// }
 
-function createData(id, names, date, type, size) {
-  return {
-    id,
-    names,
-    date,
-    type,
-    size,
-  };
-}
-
-const rows = [
-  createData(1, 305, 3.7, 67, 4.3),
-  createData(3, 452, 25.0, 51, 4.9),
-  createData(4, 262, 16.0, 24, 6.0),
-  createData(5, 159, 6.0, 24, 4.0),
-  createData(6, 356, 16.0, 49, 3.9),
-  createData(7, 408, 3.2, 87, 6.5),
-  createData(8, 237, 9.0, 37, 4.3),
-  createData(9, 375, 0.0, 94, 0.0),
-  createData(10, 518, 26.0, 65, 7.0),
-  createData(11, 392, 0.2, 98, 0.0),
-  createData(12, 318, 0, 81, 2.0),
-  createData(13, 360, 19.0, 9, 37.0),
-  createData(14, 437, 18.0, 63, 4.0),
-];
+// const allfiles = [
+//   createData(1, 305, 3.7, 67, 4.3),
+//   createData(3, 452, 25.0, 51, 4.9),
+//   createData(4, 262, 16.0, 24, 6.0),
+//   createData(5, 159, 6.0, 24, 4.0),
+//   createData(6, 356, 16.0, 49, 3.9),
+//   createData(7, 408, 3.2, 87, 6.5),
+//   createData(8, 237, 9.0, 37, 4.3),
+//   createData(9, 375, 0.0, 94, 0.0),
+//   createData(10, 518, 26.0, 65, 7.0),
+//   createData(11, 392, 0.2, 98, 0.0),
+//   createData(12, 318, 0, 81, 2.0),
+//   createData(13, 360, 19.0, 9, 37.0),
+//   createData(14, 437, 18.0, 63, 4.0),
+// ];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -84,31 +90,37 @@ const headCells = [
   },
 
   {
-    id: "names",
+    id: "NazwaPliku",
     numeric: false,
     disablePadding: false,
     label: "Nazwa pliku",
   },
 
   {
-    id: "date",
+    id: "DataUtworzenia",
     numeric: false,
     disablePadding: false,
     label: "Data utworzenia",
   },
 
   {
-    id: "type",
+    id: "TypPliku",
     numeric: false,
     disablePadding: false,
     label: "Typ pliku",
   },
 
   {
-    id: "size",
+    id: "RozmiarPliku",
     numeric: false,
     disablePadding: false,
-    label: "Rozmiar pliku",
+    label: "Rozmiar pliku (w bajtach)",
+  },
+  {
+    id: "Pobierz",
+    numeric: false,
+    disablePadding: false,
+    label: "Pobierz plik",
   },
 ];
 
@@ -142,7 +154,7 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? "right" : "left"}
+            align="center"
             padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -176,9 +188,42 @@ EnhancedTableHead.propTypes = {
 
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
+  const { isDarkTheme } = useContext(AppContext);
+
+  // const [allesfiles, setFiles] = useState([]);
+
+  // useEffect(() => {
+  //   getAllFiles();
+  // }, []);
+
+  // const getAllFiles = async () => {
+  //   let { data: files, error } = await supabase.from("files").select("*");
+  //   if (error) {
+  //     console.log(error);
+  //   }
+  //   if (files) {
+  //     setFiles(files);
+  //   }
+  // };
+
+  const deleteFiles = async (NazwaPliku) => {
+    const { data: files, error } = await supabase
+      .from("files")
+      .delete()
+      .eq("NazwaPliku", NazwaPliku);
+    if (error) throw error;
+    if (files) {
+      console.log(files);
+    }
+    // window.location.reload();
+  };
 
   return (
     <Toolbar
+      style={{
+        background: isDarkTheme ? "#000" : "#4caf4faf",
+        color: isDarkTheme ? "#ffff" : "#000",
+      }}
       sx={{
         pl: { sm: 2 },
         pr: { xs: 1, sm: 1 },
@@ -212,13 +257,23 @@ function EnhancedTableToolbar(props) {
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
+        <Tooltip
+          title="Delete"
+          style={{
+            color: isDarkTheme ? "#ffff" : "#000",
+          }}
+        >
+          <IconButton onClick={deleteFiles}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Filter list">
+        <Tooltip
+          title="Filter list"
+          style={{
+            color: isDarkTheme ? "#ffff" : "#000",
+          }}
+        >
           <IconButton>
             <FilterListIcon />
           </IconButton>
@@ -234,11 +289,48 @@ EnhancedTableToolbar.propTypes = {
 
 export default function EnhancedTable() {
   const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("calories");
+  const [orderBy, setOrderBy] = React.useState("NazwaPliku");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [allfiles, setAllFiles] = useState([]);
+  // const [namefile, setNameFile] = useState("");
+
+  useEffect(() => {
+    getFiles();
+    // getName();
+  }, []);
+
+  // const getName = async () => {
+  //   let { data: files, error } = await supabase
+  //     .from("files")
+  //     .select("NazwaPliku");
+  //   if (files) {
+  //     setNameFile(files);
+  //   } else if (error) console.log(error);
+  // };
+
+  // let url = `https://aaxzlvyhfqnxraqbdibd.supabase.co/storage/v1/object/images/${allfiles.NazwaPliku}`;
+
+  const downloadFile = async (NazwaPliku) => {
+    const { data, error } = await supabase.storage
+      .from("images")
+      .download(allfiles.NazwaPliku);
+    if (data) {
+      saveAs(data, allfiles.NazwaPliku);
+    } else if (error) console.log(error);
+  };
+
+  const getFiles = async () => {
+    let { data: files, error } = await supabase.from("files").select("*");
+    if (error) {
+      console.log(error);
+    }
+    if (files) {
+      setAllFiles(files);
+    }
+  };
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -248,7 +340,7 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.id);
+      const newSelected = allfiles.map((n) => n.id);
       setSelected(newSelected);
       return;
     }
@@ -292,7 +384,7 @@ export default function EnhancedTable() {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - allfiles.length) : 0;
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -310,25 +402,25 @@ export default function EnhancedTable() {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={allfiles.length}
             />
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.sort(getComparator(order, orderBy)).slice() */}
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(allfiles, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row.id);
+                .map((allfiles, index) => {
+                  const isItemSelected = isSelected(allfiles.id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.id)}
+                      onClick={(event) => handleClick(event, allfiles.id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.id}
+                      key={allfiles.id}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -346,12 +438,21 @@ export default function EnhancedTable() {
                         scope="row"
                         padding="none"
                       >
-                        {row.name}
+                        {allfiles.name}
                       </TableCell>
-                      <TableCell>{row.names}</TableCell>
-                      <TableCell>{row.date}</TableCell>
-                      <TableCell>{row.type}</TableCell>
-                      <TableCell>{row.size}</TableCell>
+                      <TableCell align="center">
+                        {allfiles.NazwaPliku}
+                      </TableCell>
+                      <TableCell align="center">
+                        {allfiles.DataUtworzenia}
+                      </TableCell>
+                      <TableCell align="center">{allfiles.TypPliku}</TableCell>
+                      <TableCell align="center">
+                        {allfiles.RozmiarPliku}
+                      </TableCell>
+                      <TableCell align="center">
+                        <FileDownloadIcon onClick={downloadFile} />
+                      </TableCell>
                     </TableRow>
                   );
                 })}
@@ -370,7 +471,7 @@ export default function EnhancedTable() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={allfiles.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

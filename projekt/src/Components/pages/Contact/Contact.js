@@ -27,7 +27,7 @@ const Contact = () => {
 
   const linkedinUrl = "https://www.linkedin.com/in/stepien-bartlomiej";
 
-  const gitHubUrl = "https://github.com/Bartlomiejste/Projekt";
+  const gitHubUrl = "https://github.com/Bartlomiejste/FarmZone";
 
   const downloadCV = () => {
     fetch("CV.pdf").then((response) => {

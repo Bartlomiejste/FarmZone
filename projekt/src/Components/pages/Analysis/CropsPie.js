@@ -2,11 +2,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { supabase } from "../../../supabase/config";
 import styleAnalysis from "../Analysis/Analysis.module.css";
-
 import { Chart as ChartJs, Tooltip, Title, ArcElement, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-
-import Crops from "./Crops";
 
 ChartJs.register(Tooltip, Title, ArcElement, Legend);
 
@@ -20,11 +17,20 @@ const CropsPie = () => {
     ],
     labels: "",
   });
-
+  const [nameCrops, setNameCrops] = useState([]);
   const [errors, setFormError] = useState();
 
+  const getName = async () => {
+    let { data: Crops, error } = await supabase
+      .from("Crops")
+      .select("kindofcrops");
+    if (Crops) {
+      setNameCrops(Crops);
+    }
+  };
   useEffect(() => {
     getCrops();
+    getName();
   }, []);
 
   const getCrops = async () => {
@@ -33,41 +39,43 @@ const CropsPie = () => {
       setFormError(null);
       console.log(error);
     }
+
     if (Crops) {
       const id = [];
-      let quantitycrops = [];
-      let pricecrops = [];
-      const kindofcrops = ["Rzepak", "Kukurydza", "Żyto", "Pszenica"];
-      let gain = [];
-      //   let sum = [0];
-      //   gain.map((element) => {
-      //     sum += element;
-      //   });
-      //   let percentage = ((sum * 100) / sum).toFixed(2) + "%";
-      //   console.log(percentage);
+      let name = Crops.map((name) => name.kindofcrops);
+      let one = [];
+      let sumTotal = 0;
 
       for (const i of Crops) {
-        id.push(i.id);
-        quantitycrops.push(i.quantitycrops);
-        pricecrops.push(i.pricecrops);
-        gain.push(i.quantitycrops * i.pricecrops);
-        //potrzebuje zsumować cały zysk = 7200+10500+16000+8500 = wartość, żeby każdą wartość podzielić przez sumę i mieć %
+        sumTotal += i.quantitycrops * i.pricecrops;
       }
+
+      for (const i of Crops) {
+        let percentage = (
+          (i.quantitycrops * i.pricecrops * 100) /
+          sumTotal
+        ).toFixed(2);
+        one.push(percentage);
+        console.log(one);
+      }
+
       setCrops({
         datasets: [
           {
-            data: gain,
+            data: one,
             backgroundColor: [
-              "Silver",
-              "Purple",
+              "Black",
               "Orange",
-              "Blue",
-              "Red",
               "Yellow",
+              "Green",
+              "Blue",
+              "Pink",
+              "Brown",
+              "Silver",
             ],
           },
         ],
-        labels: kindofcrops,
+        labels: name,
       });
       setFormError(null);
     }

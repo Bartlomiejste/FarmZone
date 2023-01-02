@@ -16,6 +16,12 @@
     font-size: 26px;
 }
 
+.titleProcentage {
+    font-weight: 700;
+    margin: 50px 185px;
+    font-size: 26px;
+}
+
 .input {
     width: 200px;
     text-align: center;
@@ -62,6 +68,10 @@
 
     .title {
         margin: 10px 0;
+        font-size: 12px;
+    }
+
+    .titleProcentage {
         font-size: 12px;
     }
 

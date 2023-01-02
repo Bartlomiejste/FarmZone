@@ -31,23 +31,35 @@ const MachinePie = () => {
       console.log(error);
     }
     if (Machine) {
-      const category = [];
-      const price = [];
+      let name = Machine.map((name) => name.Category);
       const id = [];
+      let one = [];
+      let sumTotal = 0;
+
       for (const i of Machine) {
-        id.push(i.id);
-        category.push(i.Category);
-        price.push(i.Price);
-        //ile % stanowią Maszyny, ile pojazdy, ile inne
+        sumTotal += i.Price;
+      }
+
+      for (const i of Machine) {
+        let percentage = ((i.Price * 100) / sumTotal).toFixed(2);
+        one.push(percentage);
       }
       setMachine({
         datasets: [
           {
-            data: price,
-            backgroundColor: ["Silver", "Purple", "Orange"],
+            data: one,
+            backgroundColor: [
+              "Silver",
+              "Purple",
+              "Orange",
+              "Black",
+              "Gold",
+              "Blue",
+              "Red",
+            ],
           },
         ],
-        labels: category,
+        labels: name,
       });
       setFormError(null);
     }
