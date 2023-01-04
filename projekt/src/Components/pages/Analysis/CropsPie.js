@@ -42,27 +42,34 @@ const CropsPie = () => {
 
     if (Crops) {
       const id = [];
-      let name = Crops.map((name) => name.kindofcrops);
-      let one = [];
-      let sumTotal = 0;
+      let name = [...new Set(Crops.map((name) => name.kindofcrops))];
 
-      for (const i of Crops) {
-        sumTotal += i.quantitycrops * i.pricecrops;
-      }
+      const sumTotal = Crops.reduce((acc, cur) => {
+        return (acc += cur.quantitycrops * cur.pricecrops);
+      }, 0);
 
-      for (const i of Crops) {
-        let percentage = (
-          (i.quantitycrops * i.pricecrops * 100) /
-          sumTotal
-        ).toFixed(2);
-        one.push(percentage);
-        console.log(one);
-      }
+      const dataToDoghnut = Crops.reduce((acc, cur) => {
+        const hasThisKindOfCrops = cur.kindofcrops.toString() in acc;
+
+        let percentage = (cur.quantitycrops * cur.pricecrops * 100) / sumTotal;
+
+        if (!hasThisKindOfCrops) {
+          return {
+            ...acc,
+            [cur.kindofcrops]: percentage,
+          };
+        } else {
+          return {
+            ...acc,
+            [cur.kindofcrops]: acc[cur.kindofcrops] + percentage,
+          };
+        }
+      }, {});
 
       setCrops({
         datasets: [
           {
-            data: one,
+            data: Object.values(dataToDoghnut).map((el) => el.toFixed(2)),
             backgroundColor: [
               "Black",
               "Orange",

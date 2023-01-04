@@ -28,31 +28,6 @@ import { saveAs } from "file-saver";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { useContext } from "react";
 import { AppContext } from "../../../AppContext/AppContext";
-// function createData(id, NazwaPliku, DataUtworzenia, TypPliku, RozmiarPliku) {
-//   return {
-//     id,
-//     NazwaPliku,
-//     DataUtworzenia,
-//     TypPliku,
-//     RozmiarPliku,
-//   };
-// }
-
-// const allfiles = [
-//   createData(1, 305, 3.7, 67, 4.3),
-//   createData(3, 452, 25.0, 51, 4.9),
-//   createData(4, 262, 16.0, 24, 6.0),
-//   createData(5, 159, 6.0, 24, 4.0),
-//   createData(6, 356, 16.0, 49, 3.9),
-//   createData(7, 408, 3.2, 87, 6.5),
-//   createData(8, 237, 9.0, 37, 4.3),
-//   createData(9, 375, 0.0, 94, 0.0),
-//   createData(10, 518, 26.0, 65, 7.0),
-//   createData(11, 392, 0.2, 98, 0.0),
-//   createData(12, 318, 0, 81, 2.0),
-//   createData(13, 360, 19.0, 9, 37.0),
-//   createData(14, 437, 18.0, 63, 4.0),
-// ];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -187,36 +162,8 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-  const { numSelected } = props;
+  const { numSelected, deleteFiles } = props;
   const { isDarkTheme } = useContext(AppContext);
-
-  // const [allesfiles, setFiles] = useState([]);
-
-  // useEffect(() => {
-  //   getAllFiles();
-  // }, []);
-
-  // const getAllFiles = async () => {
-  //   let { data: files, error } = await supabase.from("files").select("*");
-  //   if (error) {
-  //     console.log(error);
-  //   }
-  //   if (files) {
-  //     setFiles(files);
-  //   }
-  // };
-
-  const deleteFiles = async (NazwaPliku) => {
-    const { data: files, error } = await supabase
-      .from("files")
-      .delete()
-      .eq("NazwaPliku", NazwaPliku);
-    if (error) throw error;
-    if (files) {
-      console.log(files);
-    }
-    // window.location.reload();
-  };
 
   return (
     <Toolbar
@@ -290,35 +237,22 @@ EnhancedTableToolbar.propTypes = {
 export default function EnhancedTable() {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("NazwaPliku");
-  const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [allfiles, setAllFiles] = useState([]);
-  // const [namefile, setNameFile] = useState("");
+  const [selected, setSelected] = React.useState([]);
 
   useEffect(() => {
     getFiles();
-    // getName();
   }, []);
-
-  // const getName = async () => {
-  //   let { data: files, error } = await supabase
-  //     .from("files")
-  //     .select("NazwaPliku");
-  //   if (files) {
-  //     setNameFile(files);
-  //   } else if (error) console.log(error);
-  // };
-
-  // let url = `https://aaxzlvyhfqnxraqbdibd.supabase.co/storage/v1/object/images/${allfiles.NazwaPliku}`;
 
   const downloadFile = async (NazwaPliku) => {
     const { data, error } = await supabase.storage
       .from("images")
-      .download(allfiles.NazwaPliku);
+      .download(NazwaPliku);
     if (data) {
-      saveAs(data, allfiles.NazwaPliku);
+      saveAs(data, NazwaPliku);
     } else if (error) console.log(error);
   };
 
@@ -330,6 +264,18 @@ export default function EnhancedTable() {
     if (files) {
       setAllFiles(files);
     }
+  };
+
+  const deleteFiles = async () => {
+    const { data: files, error } = await supabase
+      .from("files")
+      .delete()
+      .in("id", selected);
+    if (error) throw error;
+    if (files) {
+      console.log(files);
+    }
+    getFiles();
   };
 
   const handleRequestSort = (event, property) => {
@@ -389,7 +335,10 @@ export default function EnhancedTable() {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          deleteFiles={deleteFiles}
+        />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -451,7 +400,9 @@ export default function EnhancedTable() {
                         {allfiles.RozmiarPliku}
                       </TableCell>
                       <TableCell align="center">
-                        <FileDownloadIcon onClick={downloadFile} />
+                        <FileDownloadIcon
+                          onClick={() => downloadFile(allfiles.NazwaPliku)}
+                        />
                       </TableCell>
                     </TableRow>
                   );
