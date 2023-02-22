@@ -11,7 +11,7 @@
 
 2. Open downloaded file in your code editor. Now you can download all necessary packages:<br/>
 
-- npm install<br/><br/>
+### - npm install<br/><br/>
 
 
 3. After this you can open another terminal window. Chceck if you are in correct place (you should be in /Projekt/projekt). If you're not :<br/>
