@@ -20,7 +20,7 @@
 
   If you are in /Projekt/projekt just type :<br/>
 
-- npm start <br/><br/>
+### - npm start <br/><br/>
 
 4. To log in, enter the details of a registered user:<br/><br/>
   **- login: Admin** <br/><br/>
