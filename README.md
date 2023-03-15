@@ -43,6 +43,7 @@
 | MUI | Material UI - design framework for React. |
 | CSS | Cascade Style Sheet takes care of visual site of App. |
 | Chartjs | It is an open-source JavaScript library for data visualization that supports eight chart types. |
+| Supabase | Database. |
 
 
 
