@@ -2,6 +2,11 @@
 
 # FarmZone <br/>
 
+<b>Visit website!</b>
+
+https://farm-zone.vercel.app//
+<br/>
+
 ## Installation 💿<br/>
 
 1. Download project from Github repository. Check out link below to see the way to do it:<br/>
