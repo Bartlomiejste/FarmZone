@@ -2,6 +2,11 @@
 
 # FarmZone <br/>
 
+<b>Visit website!</b>
+
+https://farm-zone.vercel.app//
+<br/>
+
 ## Installation 💿<br/>
 
 1. Download project from Github repository. Check out link below to see the way to do it:<br/>
@@ -11,7 +16,7 @@
 
 2. Open downloaded file in your code editor. Now you can download all necessary packages:<br/>
 
-- npm install<br/><br/>
+### - npm install<br/><br/>
 
 
 3. After this you can open another terminal window. Chceck if you are in correct place (you should be in /Projekt/projekt). If you're not :<br/>
@@ -20,7 +25,7 @@
 
   If you are in /Projekt/projekt just type :<br/>
 
-- npm start <br/><br/>
+### - npm start <br/><br/>
 
 4. To log in, enter the details of a registered user:<br/><br/>
   **- login: Admin** <br/><br/>
@@ -43,6 +48,7 @@
 | MUI | Material UI - design framework for React. |
 | CSS | Cascade Style Sheet takes care of visual site of App. |
 | Chartjs | It is an open-source JavaScript library for data visualization that supports eight chart types. |
+| Supabase | Database. |
 
 
 
