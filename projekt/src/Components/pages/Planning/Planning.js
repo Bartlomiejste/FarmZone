@@ -4,16 +4,15 @@ import { Layout } from "../../Layout/Layout";
 import AccordingServis from "./AccordingServis";
 import { supabase } from "../../../supabase/config";
 import Working from "./Working";
+import { Box } from "@mui/material";
 
 const Planning = () => {
   const [dates, setDate] = useState();
   const [vehicleName, setVehicleName] = useState();
   const [registrationNumber, setRegistrationNumber] = useState();
-  const [all, setAll] = useState([]);
 
   const createServis = async (e) => {
     e.preventDefault();
-    console.log({ vehicleName, registrationNumber, dates });
     const { data, error } = await supabase
       .from("Servis")
       .insert([{ vehicleName, registrationNumber, dates }]);
@@ -22,7 +21,7 @@ const Planning = () => {
     }
     console.log(error);
     if (data) {
-      setAll(data);
+      return data;
     }
     window.location.reload();
   };
@@ -30,14 +29,14 @@ const Planning = () => {
   return (
     <>
       <Layout>
-        <div className={stylePlanning.planning__section}>
-          <div className={stylePlanning.overview}>
+        <Box className={stylePlanning.planning__section}>
+          <Box className={stylePlanning.overview}>
             <form
               onSubmit={createServis}
               className={stylePlanning.overview__form}
             >
-              <div className={stylePlanning.overview__title}>Przeglądy</div>
-              <div>
+              <Box className={stylePlanning.overview__title}>Przeglądy</Box>
+              <Box>
                 <label htmlFor="date">Data przeglądu: </label>
                 <input
                   type="date"
@@ -45,8 +44,8 @@ const Planning = () => {
                   className={stylePlanning.overview__input}
                   required
                 />
-              </div>
-              <div>
+              </Box>
+              <Box>
                 <label htmlFor="vehicleName">Nazwa pojazdu: </label>
                 <input
                   required
@@ -55,8 +54,8 @@ const Planning = () => {
                   onChange={(e) => setVehicleName(e.target.value)}
                   className={stylePlanning.overview__input}
                 />
-              </div>
-              <div>
+              </Box>
+              <Box>
                 <label htmlFor="registrationNumber">Nr rejestracyjny: </label>
                 <input
                   required
@@ -65,15 +64,15 @@ const Planning = () => {
                   onChange={(e) => setRegistrationNumber(e.target.value)}
                   className={stylePlanning.overview__input}
                 />
-              </div>
+              </Box>
               <button className={stylePlanning.overview__btn}>
                 Dodaj przegląd
               </button>
             </form>
             <Working />
-          </div>
+          </Box>
           <AccordingServis />
-        </div>
+        </Box>
       </Layout>
     </>
   );

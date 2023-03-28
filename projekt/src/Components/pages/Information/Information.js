@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import styleInformation from "../Information/Information.module.css";
 import { Layout } from "../../Layout/Layout";
+import { Box } from "@mui/material";
 
 const Information = () => {
   useEffect(() => {}, []);
@@ -26,37 +27,37 @@ const Information = () => {
 
   return (
     <Layout>
-      <div className={styleInformation.information__section}>
+      <Box className={styleInformation.information__section}>
         <p className={styleInformation.information__title}>
           Najnowsze Informacje
         </p>
-        <div className={styleInformation.information__grid}>
-          <div className={styleInformation.one} onClick={() => farmerPage()}>
-            <div className={styleInformation.information__one_img}></div>
-          </div>
-          <div className={styleInformation.two} onClick={() => farmPage()}>
-            <div className={styleInformation.information__two_img}></div>
-          </div>
-          <div className={styleInformation.three} onClick={() => agroPage()}>
-            <div className={styleInformation.information__three_img}></div>
-          </div>
-          <div className={styleInformation.four} onClick={() => infoPage()}>
-            <div className={styleInformation.information__four_img}></div>
-          </div>
-          <div
+        <Box className={styleInformation.information__grid}>
+          <Box className={styleInformation.one} onClick={() => farmerPage()}>
+            <Box className={styleInformation.information__one_img}></Box>
+          </Box>
+          <Box className={styleInformation.two} onClick={() => farmPage()}>
+            <Box className={styleInformation.information__two_img}></Box>
+          </Box>
+          <Box className={styleInformation.three} onClick={() => agroPage()}>
+            <Box className={styleInformation.information__three_img}></Box>
+          </Box>
+          <Box className={styleInformation.four} onClick={() => infoPage()}>
+            <Box className={styleInformation.information__four_img}></Box>
+          </Box>
+          <Box
             className={styleInformation.five}
             onClick={() => agroProfilPage()}
           >
-            <div className={styleInformation.information__five_img}></div>
-          </div>
-          <div
+            <Box className={styleInformation.information__five_img}></Box>
+          </Box>
+          <Box
             className={styleInformation.six}
             onClick={() => stockMarketPage()}
           >
-            <div className={styleInformation.information__six_img}></div>
-          </div>
-        </div>
-      </div>
+            <Box className={styleInformation.information__six_img}></Box>
+          </Box>
+        </Box>
+      </Box>
     </Layout>
   );
 };

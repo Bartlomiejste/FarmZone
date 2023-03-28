@@ -3,6 +3,7 @@ import styleDocuments from "../Documents/Documents.module.css";
 import { Layout } from "../../Layout/Layout";
 import { supabase } from "../../../supabase/config";
 import TableFiles from "../../pages/Documents/TableFiles";
+import { Box } from "@mui/material";
 
 const Documents = () => {
   const [file, setFile] = useState(null);
@@ -36,7 +37,7 @@ const Documents = () => {
 
   return (
     <Layout>
-      <div className={styleDocuments.documents__section}>
+      <Box className={styleDocuments.documents__section}>
         <form
           className={styleDocuments.documents__form}
           onSubmit={handleUpload}
@@ -58,7 +59,7 @@ const Documents = () => {
           </button>
         </form>
         <TableFiles />
-      </div>
+      </Box>
     </Layout>
   );
 };

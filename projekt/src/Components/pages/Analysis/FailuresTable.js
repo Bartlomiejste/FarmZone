@@ -74,77 +74,75 @@ const FailuresTable = () => {
     window.location.reload();
   };
   return (
-    <>
-      <TableContainer component={Paper} sx={{ width: "100%" }}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell
-                align="left"
-                style={{
-                  fontWeight: "bold",
-                  background: isDarkTheme ? "#000" : "#4caf4faf",
-                  color: isDarkTheme ? "#ffff" : "#000",
-                }}
-              >
-                {checkedAll ? (
-                  <DeleteIcon
-                    className={stylePlanning.deleteIcon}
-                    onClick={deleteAllSelected}
-                  />
-                ) : null}
-              </TableCell>
-
-              <TableCell
-                align="center"
-                style={{
-                  fontWeight: "bold",
-                  background: isDarkTheme ? "#000" : "#4caf4faf",
-                  color: isDarkTheme ? "#ffff" : "#000",
-                }}
-              >
-                Koszt awarii
-              </TableCell>
-              <TableCell
-                align="center"
-                style={{
-                  fontWeight: "bold",
-                  background: isDarkTheme ? "#000" : "#4caf4faf",
-                  color: isDarkTheme ? "#ffff" : "#000",
-                }}
-              >
-                Uszkodzony element
-              </TableCell>
-              <TableCell
-                align="center"
-                style={{
-                  fontWeight: "bold",
-                  background: isDarkTheme ? "#000" : "#4caf4faf",
-                  color: isDarkTheme ? "#ffff" : "#000",
-                }}
-              >
-                <input
-                  name="inputAll"
-                  type="checkbox"
-                  onChange={(event) => selectAll(event.target.checked)}
-                  checked={checkedAll}
+    <TableContainer component={Paper} sx={{ width: "100%" }}>
+      <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell
+              align="left"
+              style={{
+                fontWeight: "bold",
+                background: isDarkTheme ? "#000" : "#4caf4faf",
+                color: isDarkTheme ? "#ffff" : "#000",
+              }}
+            >
+              {checkedAll ? (
+                <DeleteIcon
+                  className={stylePlanning.deleteIcon}
+                  onClick={deleteAllSelected}
                 />
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {damage.map((row) => (
-              <FailuresRow
-                checkedAll={checkedAll}
-                deleteDamage={deleteDamage}
-                rowData={row}
-                key={row.id}
+              ) : null}
+            </TableCell>
+
+            <TableCell
+              align="center"
+              style={{
+                fontWeight: "bold",
+                background: isDarkTheme ? "#000" : "#4caf4faf",
+                color: isDarkTheme ? "#ffff" : "#000",
+              }}
+            >
+              Koszt awarii
+            </TableCell>
+            <TableCell
+              align="center"
+              style={{
+                fontWeight: "bold",
+                background: isDarkTheme ? "#000" : "#4caf4faf",
+                color: isDarkTheme ? "#ffff" : "#000",
+              }}
+            >
+              Uszkodzony element
+            </TableCell>
+            <TableCell
+              align="center"
+              style={{
+                fontWeight: "bold",
+                background: isDarkTheme ? "#000" : "#4caf4faf",
+                color: isDarkTheme ? "#ffff" : "#000",
+              }}
+            >
+              <input
+                name="inputAll"
+                type="checkbox"
+                onChange={(event) => selectAll(event.target.checked)}
+                checked={checkedAll}
               />
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </>
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {damage.map((row) => (
+            <FailuresRow
+              checkedAll={checkedAll}
+              deleteDamage={deleteDamage}
+              rowData={row}
+              key={row.id}
+            />
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 

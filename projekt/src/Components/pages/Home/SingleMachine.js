@@ -7,6 +7,7 @@ import style from "../Home/Home.module.css";
 import { supabase } from "../../../supabase/config";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import { Box } from "@mui/material";
 
 export const SingleMachine = ({ machine, getMachines }) => {
   const [Category, setCategory] = useState(machine.Category);
@@ -148,7 +149,7 @@ export const SingleMachine = ({ machine, getMachines }) => {
       </TableCell>
 
       <TableCell align="left" sx={{ width: 90 }}>
-        <div className={style.table__icon}>
+        <Box className={style.table__icon}>
           {isEditing ? (
             <>
               <CheckIcon onClick={() => updateMachine(machine.id)} />
@@ -163,7 +164,7 @@ export const SingleMachine = ({ machine, getMachines }) => {
               />
             </>
           )}
-        </div>
+        </Box>
       </TableCell>
     </TableRow>
   );

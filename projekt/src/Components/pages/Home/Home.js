@@ -14,6 +14,7 @@ import { useContext } from "react";
 import { AppContext } from "../../../AppContext/AppContext";
 import { supabase } from "../../../supabase/config";
 import { SingleMachine } from "./SingleMachine";
+import { Box } from "@mui/material";
 
 export default function Home() {
   const { isDarkTheme } = useContext(AppContext);
@@ -89,109 +90,107 @@ export default function Home() {
   }
 
   return (
-    <>
-      <div className={style.home__section}>
-        <div className={style.home__information}>
-          <p style={{ fontWeight: "bold" }}>Ogólne podsumowanie:</p>
-          <p>
-            Saldo:
-            <span className={style.darkgreen}>{summary} zł</span>
-          </p>
-          <p>
-            Zakup maszyn:<span className={style.yellow}>{buyDevice} zł</span>
-          </p>
-          <p>
-            Awarie:
-            <span className={style.red}>{additionalDamage} zł</span>
-          </p>
-          <p>
-            Zebrane plony:
-            <span className={style.green}>{additionalCrops} zł</span>
-          </p>
-        </div>
-        <AddMachine />
+    <Box className={style.home__section}>
+      <Box className={style.home__information}>
+        <p style={{ fontWeight: "bold" }}>Ogólne podsumowanie:</p>
+        <p>
+          Saldo:
+          <span className={style.darkgreen}>{summary} zł</span>
+        </p>
+        <p>
+          Zakup maszyn:<span className={style.yellow}>{buyDevice} zł</span>
+        </p>
+        <p>
+          Awarie:
+          <span className={style.red}>{additionalDamage} zł</span>
+        </p>
+        <p>
+          Zebrane plony:
+          <span className={style.green}>{additionalCrops} zł</span>
+        </p>
+      </Box>
+      <AddMachine />
 
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell
-                  align="center"
-                  style={{
-                    fontWeight: "bold",
-                    background: isDarkTheme ? "#000" : "#4caf4faf",
-                    color: isDarkTheme ? "#ffff" : "#000",
-                  }}
-                >
-                  Kategoria
-                </TableCell>
-                <TableCell
-                  align="center"
-                  style={{
-                    fontWeight: "bold",
-                    background: isDarkTheme ? "#000" : "#4caf4faf",
-                    color: isDarkTheme ? "#ffff" : "#000",
-                  }}
-                >
-                  Nazwa
-                </TableCell>
-                <TableCell
-                  align="center"
-                  style={{
-                    fontWeight: "bold",
-                    background: isDarkTheme ? "#000" : "#4caf4faf",
-                    color: isDarkTheme ? "#ffff" : "#000",
-                  }}
-                >
-                  Stan
-                </TableCell>
-                <TableCell
-                  align="center"
-                  style={{
-                    fontWeight: "bold",
-                    background: isDarkTheme ? "#000" : "#4caf4faf",
-                    color: isDarkTheme ? "#ffff" : "#000",
-                  }}
-                >
-                  Uszkodzenia
-                </TableCell>
-                <TableCell
-                  align="center"
-                  style={{
-                    fontWeight: "bold",
-                    background: isDarkTheme ? "#000" : "#4caf4faf",
-                    color: isDarkTheme ? "#ffff" : "#000",
-                  }}
-                >
-                  Cena w zł
-                </TableCell>
-                <TableCell
-                  align="center"
-                  style={{
-                    fontWeight: "bold",
-                    background: isDarkTheme ? "#000" : "#4caf4faf",
-                    color: isDarkTheme ? "#ffff" : "#000",
-                  }}
-                >
-                  Akcja
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rowname &&
-                rowname
-                  .sort((a, b) => (a.id > b.id ? 1 : -1))
-                  .map((name) => (
-                    <SingleMachine
-                      machine={name}
-                      key={name.id}
-                      getMachines={getMachines}
-                    />
-                  ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </div>
-    </>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell
+                align="center"
+                style={{
+                  fontWeight: "bold",
+                  background: isDarkTheme ? "#000" : "#4caf4faf",
+                  color: isDarkTheme ? "#ffff" : "#000",
+                }}
+              >
+                Kategoria
+              </TableCell>
+              <TableCell
+                align="center"
+                style={{
+                  fontWeight: "bold",
+                  background: isDarkTheme ? "#000" : "#4caf4faf",
+                  color: isDarkTheme ? "#ffff" : "#000",
+                }}
+              >
+                Nazwa
+              </TableCell>
+              <TableCell
+                align="center"
+                style={{
+                  fontWeight: "bold",
+                  background: isDarkTheme ? "#000" : "#4caf4faf",
+                  color: isDarkTheme ? "#ffff" : "#000",
+                }}
+              >
+                Stan
+              </TableCell>
+              <TableCell
+                align="center"
+                style={{
+                  fontWeight: "bold",
+                  background: isDarkTheme ? "#000" : "#4caf4faf",
+                  color: isDarkTheme ? "#ffff" : "#000",
+                }}
+              >
+                Uszkodzenia
+              </TableCell>
+              <TableCell
+                align="center"
+                style={{
+                  fontWeight: "bold",
+                  background: isDarkTheme ? "#000" : "#4caf4faf",
+                  color: isDarkTheme ? "#ffff" : "#000",
+                }}
+              >
+                Cena w zł
+              </TableCell>
+              <TableCell
+                align="center"
+                style={{
+                  fontWeight: "bold",
+                  background: isDarkTheme ? "#000" : "#4caf4faf",
+                  color: isDarkTheme ? "#ffff" : "#000",
+                }}
+              >
+                Akcja
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rowname &&
+              rowname
+                .sort((a, b) => (a.id > b.id ? 1 : -1))
+                .map((name) => (
+                  <SingleMachine
+                    machine={name}
+                    key={name.id}
+                    getMachines={getMachines}
+                  />
+                ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 }

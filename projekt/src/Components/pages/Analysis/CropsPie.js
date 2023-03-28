@@ -4,6 +4,7 @@ import { supabase } from "../../../supabase/config";
 import styleAnalysis from "../Analysis/Analysis.module.css";
 import { Chart as ChartJs, Tooltip, Title, ArcElement, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+import { Box } from "@mui/material";
 
 ChartJs.register(Tooltip, Title, ArcElement, Legend);
 
@@ -37,7 +38,6 @@ const CropsPie = () => {
     let { data: Crops, error } = await supabase.from("Crops").select("*");
     if (error) {
       setFormError(null);
-      console.log(error);
     }
 
     if (Crops) {
@@ -88,14 +88,12 @@ const CropsPie = () => {
     }
   };
   return (
-    <>
-      <div
-        className={styleAnalysis.analysis__pie}
-        style={{ width: "20%", height: "20%" }}
-      >
-        <Doughnut data={crops} />
-      </div>
-    </>
+    <Box
+      className={styleAnalysis.analysis__pie}
+      style={{ width: "20%", height: "20%" }}
+    >
+      <Doughnut data={crops} />
+    </Box>
   );
 };
 

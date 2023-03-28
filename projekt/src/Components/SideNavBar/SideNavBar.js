@@ -18,6 +18,7 @@ import MenuItem from "@mui/material/MenuItem";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 import FolderIcon from "@mui/icons-material/Folder";
+import { Box, Typography } from "@mui/material";
 
 export const SideNavBar = () => {
   const [menuItems, setMenuItems] = useState([
@@ -57,26 +58,22 @@ export const SideNavBar = () => {
       path: "/kontakt",
     },
   ]);
-  const { visible } = useContext(AppContext);
-  const { change } = useContext(AppContext);
-  const { isDarkTheme } = useContext(AppContext);
-
-  const { logout } = useContext(AppContext);
+  const { visible, change, isDarkTheme, logout } = useContext(AppContext);
 
   return (
     <Suspense
       fallback={
-        <p>
+        <Typography>
           <DelayedFallback />
-        </p>
+        </Typography>
       }
     >
-      <div
+      <Box
         className={`${style.container} ${
           visible ? style.container : style.container_min
         } `}
       >
-        <div
+        <Box
           className={`${style.menu__arrow} ${
             visible ? style.menu__arrow : style.menu__arrow_min
           }`}
@@ -87,26 +84,37 @@ export const SideNavBar = () => {
           ) : (
             <KeyboardDoubleArrowRightIcon />
           )}
-        </div>
-        <div
+        </Box>
+        <Box
           className={`${style.menu__avatar} ${
             visible ? style.menu__avatar : null
           }`}
         >
           <Avatar src="/broken-image.jpg" className={style.avatarimg} />
-          {visible ? <p className={style.nameuser}>Admin</p> : null}
-        </div>
-        <div
+          {visible ? (
+            <Typography sx={{ fontFamily: "Quicksand, sans-serif" }}>
+              Admin
+            </Typography>
+          ) : null}
+        </Box>
+        <Box
           className={`${style.menu__logout} ${
             visible ? style.menu__logout : style.menu__logout_min
           }`}
           onClick={logout}
         >
           <LogoutIcon />
-          {visible ? <p className={style.logutname}>Wyloguj</p> : null}
-        </div>
+          {visible ? (
+            <Typography
+              sx={{ fontFamily: "Quicksand, sans-serif" }}
+              className={style.logutname}
+            >
+              Wyloguj
+            </Typography>
+          ) : null}
+        </Box>
 
-        <div
+        <Box
           className={`${style.menu__navigation} ${
             isDarkTheme ? style.dark : null
           }`}
@@ -122,24 +130,26 @@ export const SideNavBar = () => {
               to={path}
             >
               <MenuItem style={{ background: "transparent" }}>
-                <div className={style.menu__navigation_icon}>{icon}</div>
-                <div className={style.textMenuItem}>
+                <Box className={style.menu__navigation_icon}>{icon}</Box>
+                <Box className={style.textMenuItem}>
                   {visible ? text : null}
-                </div>
+                </Box>
               </MenuItem>
             </Link>
           ))}
-        </div>
-        <div
+        </Box>
+        <Box
           className={`${style.menu__navigation_footer} ${
             visible
               ? style.menu__navigation_footer
               : style.menu__navigation_footer_min
           }`}
         >
-          <p>@Copyright 2022</p>
-        </div>
-      </div>
+          <Typography sx={{ fontFamily: "Quicksand, sans-serif" }}>
+            @Copyright 2022
+          </Typography>
+        </Box>
+      </Box>
     </Suspense>
   );
 };

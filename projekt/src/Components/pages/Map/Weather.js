@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import fetchWeather from "./fetchWeather";
 import styleWeather from "../Map/Weather.module.css";
 import { Layout } from "../../Layout/Layout";
+import { Box, Typography } from "@mui/material";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -17,8 +18,8 @@ function App() {
 
   return (
     <Layout>
-      <div className={styleWeather.map__section}>
-        <div className={styleWeather.weather__description}>
+      <Box className={styleWeather.map__section}>
+        <Box className={styleWeather.weather__description}>
           <b>Pogoda</b> to kluczowy element wpływający na termin pojawienia się
           oraz rozwój populacji szkodników na polach uprawnych, ale i na ich
           szkodliwość. Jakie gatunki się pojawią i w jakim nasileniu, to jednak
@@ -42,9 +43,9 @@ function App() {
               pola:
             </strong>
           </p>
-        </div>
+        </Box>
 
-        <div className={styleWeather.main__container}>
+        <Box className={styleWeather.main__container}>
           <input
             type="text"
             className={styleWeather.search}
@@ -54,31 +55,31 @@ function App() {
             onKeyPress={search}
           ></input>
           {weather.main && (
-            <div className={styleWeather.city}>
-              <h2 className={styleWeather.city__name}>
+            <Box className={styleWeather.city}>
+              <Typography variant="h2" className={styleWeather.city__name}>
                 <span>{weather.name}</span>
                 <sup className={styleWeather.country}>
                   {weather.sys.country}
                 </sup>
-              </h2>
-              <div className={styleWeather.city__temp}>
-                <div className={styleWeather.city__temp_title}>
+              </Typography>
+              <Box className={styleWeather.city__temp}>
+                <Box className={styleWeather.city__temp_title}>
                   Pogoda na dziś
-                </div>
+                </Box>
                 {Math.round(weather.main.temp)}
                 <sup className={styleWeather.temperature}>&deg;C</sup>
-              </div>
-              <div className={styleWeather.info}>
+              </Box>
+              <Box className={styleWeather.info}>
                 <img
                   className={styleWeather.city__icon}
                   src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
                   alt={weather.weather[0].desccription}
-                ></img>
-              </div>
-            </div>
+                />
+              </Box>
+            </Box>
           )}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </Layout>
   );
 }

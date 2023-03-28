@@ -5,6 +5,7 @@ import { useContext } from "react";
 import Header from "../Header/Header";
 import SideNavBar from "../SideNavBar/SideNavBar";
 import { useNavigate } from "react-router-dom";
+import { Box } from "@mui/material";
 
 export const Layout = ({ children }) => {
   const { visible } = useContext(AppContext);
@@ -19,12 +20,10 @@ export const Layout = ({ children }) => {
   }, []);
 
   return (
-    <>
-      <div className={`${style.main} ${visible ? style.main : style.main_min}`}>
-        <Header />
-        <SideNavBar />
-        {children}
-      </div>
-    </>
+    <Box className={`${style.main} ${visible ? style.main : style.main_min}`}>
+      <Header />
+      <SideNavBar />
+      {children}
+    </Box>
   );
 };

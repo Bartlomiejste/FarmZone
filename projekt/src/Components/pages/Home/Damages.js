@@ -3,6 +3,7 @@ import styleAnalysis from "../Analysis/Analysis.module.css";
 import { useState } from "react";
 import { supabase } from "../../../supabase/config";
 import { useEffect } from "react";
+import { Box } from "@mui/material";
 
 const Damages = () => {
   const [cost, setCost] = useState();
@@ -45,10 +46,10 @@ const Damages = () => {
   }
 
   return (
-    <div>
+    <Box>
       <form onSubmit={createDamage} className={styleAnalysis.form}>
         <p className={styleAnalysis.title}>Awarie</p>
-        <div>
+        <Box>
           <label htmlFor="cost">Koszt awarii (zł)</label>
           <input
             type="number"
@@ -57,8 +58,8 @@ const Damages = () => {
             required
           />
           <p>{additionalDamage}</p>
-        </div>
-        <div>
+        </Box>
+        <Box>
           <label htmlFor="damageelement">Uszkodzony element</label>
           <input
             type="text"
@@ -66,10 +67,10 @@ const Damages = () => {
             className={styleAnalysis.input}
             required
           />
-        </div>
+        </Box>
         <button className={styleAnalysis.btn}>Dodaj awarię</button>
       </form>
-    </div>
+    </Box>
   );
 };
 

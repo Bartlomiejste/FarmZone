@@ -1,5 +1,4 @@
-import { createContext, useState, useContext, useEffect } from "react";
-import { supabase } from "../../../projekt/src/supabase/config";
+import { createContext, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const AppContext = createContext(undefined);

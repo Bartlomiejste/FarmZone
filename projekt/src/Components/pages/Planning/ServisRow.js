@@ -5,6 +5,7 @@ import { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import stylePlanning from "../Planning/Planning.module.css";
 import { differenceInCalendarDays } from "date-fns";
+import { Box } from "@mui/material";
 
 const ServisRow = ({ checkedAll, deleteServis, rowData }) => {
   const [checked, setChecked] = useState(false);
@@ -40,7 +41,7 @@ const ServisRow = ({ checkedAll, deleteServis, rowData }) => {
 
         <TableCell align="center">
           {differenceInCalendarDays(new Date(rowData.dates), new Date())}
-          <span>dni</span>
+          <Box component="span">dni</Box>
         </TableCell>
         <TableCell align="center" sx={{ width: 150 }}>
           <input

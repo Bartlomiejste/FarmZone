@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { AppContext } from "../../AppContext/AppContext";
 import Switch from "@mui/material/Switch";
 import Clock from "./Clock/Clock";
+import { Box, Typography } from "@mui/material";
 
 const Header = () => {
   const { set } = useContext(AppContext);
@@ -13,28 +14,35 @@ const Header = () => {
   const pathname = window.location.pathname;
 
   return (
-    <>
-      <div className={`${style.header} ${isDarkTheme ? style.dark : null}`}>
-        <div className={style.header__name}>
-          <p className={style.header__name_title}>
-            Gospodarstwo: Gospodarstwo testowe
-          </p>
-          <p className={style.header__name_navName}>{pathname.split("/")}</p>
-        </div>
-        <div>
-          <img src={logo} alt="logo" className={style.header__img}></img>
-        </div>
-        <div>
-          <Clock />
-          <Switch
-            checked={isDarkTheme}
-            onChange={set}
-            inputProps={{ "aria-label": "controlled" }}
-            className={style.header__switch}
-          />
-        </div>
-      </div>
-    </>
+    <Box className={`${style.header} ${isDarkTheme ? style.dark : null}`}>
+      <Box className={style.header__name}>
+        <Typography variant="p" className={style.header__name_title}>
+          Gospodarstwo: Gospodarstwo testowe
+        </Typography>
+        <Typography
+          sx={{
+            fontSize: "25px",
+            marginTop: "5px",
+            fontFamily: "'Quicksand', sans-serif",
+          }}
+          className={style.header__name_name}
+        >
+          {pathname.split("/")}
+        </Typography>
+      </Box>
+      <Box>
+        <img src={logo} alt="logo" className={style.header__img}></img>
+      </Box>
+      <Box>
+        <Clock />
+        <Switch
+          checked={isDarkTheme}
+          onChange={set}
+          inputProps={{ "aria-label": "controlled" }}
+          className={style.header__switch}
+        />
+      </Box>
+    </Box>
   );
 };
 

@@ -21,6 +21,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import stylePlanning from "../Planning/Planning.module.css";
 import ServisRow from "./ServisRow";
 import WorkingTable from "./WorkingTable";
+import { Box, Input } from "@mui/material";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -72,7 +73,7 @@ export default function CustomizedAccordions() {
     setCheckedAll(value);
   };
 
-  const handleChange = (panel) => (event, newExpanded) => {
+  const handleChange = (panel) => (newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
 
@@ -92,7 +93,7 @@ export default function CustomizedAccordions() {
     }
   };
 
-  const deleteAllSelected = async (id) => {
+  const deleteAllSelected = async () => {
     const { data: Servis, error } = await supabase
       .from("Servis")
       .delete()
@@ -124,7 +125,7 @@ export default function CustomizedAccordions() {
 
   return (
     <>
-      <div className={stylePlanning.table__title}>Historia</div>
+      <Box className={stylePlanning.table__title}>Historia</Box>
       <Accordion onChange={handleChange("panel1")}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
           <Typography>Przeglądy</Typography>
@@ -189,7 +190,7 @@ export default function CustomizedAccordions() {
                         color: isDarkTheme ? "#ffff" : "#000",
                       }}
                     >
-                      <input
+                      <Input
                         name="inputAll"
                         type="checkbox"
                         onChange={(event) => selectAll(event.target.checked)}

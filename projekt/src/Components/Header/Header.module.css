@@ -7,19 +7,18 @@
     padding: 35px;
     background-color: #ffffff;
     font-weight: 500;
+
 }
 
 .header__name_title {
     font-size: 16px;
 }
 
-.header__name_navName {
-    margin-top: 5px;
-    font-size: 25px;
-    color: var(--main-darkgreen-color)
+.header__name_name {
+    color: var(--main-darkgreen-color);
 }
 
-.header__name_navName::first-letter {
+.header__name_name::first-letter {
     text-transform: capitalize;
 }
 

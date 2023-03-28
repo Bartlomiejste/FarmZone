@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// lazy lodaing Suspense
 import LoginPage from "./Components/pages/LoginPage/LoginPage";
 import Analysis from "./Components/pages/Analysis/Analysis";
 import Map from "./Components/pages/Map/Weather";
@@ -14,33 +13,29 @@ import { AppContextProvider } from "./AppContext/AppContext";
 
 function App() {
   return (
-    <>
-      <ErrorBoundary>
-        <BrowserRouter>
-          <AppContextProvider>
-            <Routes>
-              <Route path="/" element={<LoginPage />} />
+    <ErrorBoundary>
+      <BrowserRouter>
+        <AppContextProvider>
+          <Routes>
+            <Route path="/" element={<LoginPage />} />
 
-              <Route path="/pulpit" element={<Main />} />
+            <Route path="/pulpit" element={<Main />} />
 
-              <Route path="/analiza" element={<Analysis />} />
+            <Route path="/analiza" element={<Analysis />} />
 
-              <Route path="/pogoda" element={<Map />} />
+            <Route path="/pogoda" element={<Map />} />
 
-              <Route path="/planowanie" element={<Planning />} />
+            <Route path="/planowanie" element={<Planning />} />
 
-              <Route path="/informacje" element={<Information />} />
+            <Route path="/informacje" element={<Information />} />
 
-              <Route path="/dokumenty" element={<Documents />} />
+            <Route path="/dokumenty" element={<Documents />} />
 
-              <Route path="/kontakt" element={<Contact />} />
-
-              {/* 404 */}
-            </Routes>
-          </AppContextProvider>
-        </BrowserRouter>
-      </ErrorBoundary>
-    </>
+            <Route path="/kontakt" element={<Contact />} />
+          </Routes>
+        </AppContextProvider>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 

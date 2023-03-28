@@ -8,37 +8,38 @@ import FailuresTable from "./FailuresTable";
 import CropsTable from "./CropsTable";
 import CropsPie from "./CropsPie";
 import MachinePie from "./MachinePie";
+import { Box } from "@mui/material";
 ChartJs.register(Tooltip, Title, ArcElement, Legend);
 
 const Analysis = () => {
   return (
     <Layout>
-      <div className={styleAnalysis.analysis__section}>
-        <div className={styleAnalysis.formStyle}>
-          <div>
+      <Box className={styleAnalysis.analysis__section}>
+        <Box className={styleAnalysis.formStyle}>
+          <Box>
             <Failures />
-          </div>
-          <div className={styleAnalysis.table}>
+          </Box>
+          <Box className={styleAnalysis.table}>
             <FailuresTable />
-          </div>
+          </Box>
 
-          <div>
+          <Box>
             <Crops />
-          </div>
-          <div className={styleAnalysis.table}>
+          </Box>
+          <Box className={styleAnalysis.table}>
             <CropsTable />
-          </div>
-        </div>
-        <div>
-          <div className={styleAnalysis.titleProcentage}>
+          </Box>
+        </Box>
+        <Box>
+          <Box className={styleAnalysis.titleProcentage}>
             Podsumowanie procentowe:
-          </div>
-          <div className={styleAnalysis.pie}>
+          </Box>
+          <Box className={styleAnalysis.pie}>
             <MachinePie />
             <CropsPie />
-          </div>
-        </div>
-      </div>
+          </Box>
+        </Box>
+      </Box>
     </Layout>
   );
 };

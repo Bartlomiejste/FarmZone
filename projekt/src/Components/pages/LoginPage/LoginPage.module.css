@@ -23,7 +23,7 @@
     margin: 25px;
     display: flex;
     flex-direction: column;
-    gap:20px
+    gap: 20px
 }
 
 .login__title {
@@ -46,10 +46,10 @@
     background-color: #ffffff;
 }
 
-.login__input:focus{
+.login__input:focus {
     outline: none;
 }
-  
+
 .login__btn {
     background-color: #2196f3;
     font-weight: 400;
@@ -57,7 +57,7 @@
     font-size: 15px;
     height: 35px;
     width: 100%;
-    color: #ffffff;            
+    color: #ffffff;
     border-radius: 5px;
     border: none;
     cursor: pointer;
@@ -71,7 +71,7 @@
 .error {
     color: #ff0000;
 }
- 
+
 
 @media (max-width: 480px) {
 

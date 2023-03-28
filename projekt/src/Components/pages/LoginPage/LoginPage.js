@@ -5,9 +5,9 @@ import { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { SignupSchema } from "./ValidationLoginPage";
 import { useNavigate } from "react-router-dom";
-
 import { supabase } from "../../../supabase/config";
 import { AppContext } from "../../../AppContext/AppContext";
+import { Box } from "@mui/material";
 
 export function FormField({ name, errors, touched, value }) {
   return (
@@ -56,71 +56,65 @@ export const LoginPage = (props) => {
   }, []);
 
   return (
-    <>
-      <Formik
-        initialValues={{
-          Login: "",
-          Password: "",
-        }}
-        validationSchema={SignupSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ handleSubmit, handleChange, handleBlur, values }) => (
-          <div>
-            <Form onSubmit={handleSubmit} className={style.container}>
-              <img
-                src={images}
-                className={style.container__images}
-                alt="logo"
-              />
-              <div className={style.login}>
-                <h1 className={style.login__title}>Logowanie do systemu</h1>
-                <Field name={"Login"}>
-                  {({ field, meta }) => (
-                    <div>
-                      <input
-                        className={style.login__input}
-                        type="text"
-                        placeholder="Login"
-                        {...field}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.Login}
-                      />
-                      {meta.touched && meta.error && (
-                        <div className={style.error}>{meta.error}</div>
-                      )}
-                    </div>
-                  )}
-                </Field>
-                <Field name={"Password"}>
-                  {({ field, meta }) => (
-                    <div>
-                      <input
-                        className={style.login__input}
-                        type="Password"
-                        placeholder="Password"
-                        {...field}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.Password}
-                      />
-                      {meta.touched && meta.error && (
-                        <div className={style.error}>{meta.error}</div>
-                      )}
-                    </div>
-                  )}
-                </Field>
-                {errorForm}
-                <button type="submit" className={style.login__btn}>
-                  Zaloguj
-                </button>
-              </div>
-            </Form>
-          </div>
-        )}
-      </Formik>
-    </>
+    <Formik
+      initialValues={{
+        Login: "",
+        Password: "",
+      }}
+      validationSchema={SignupSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ handleSubmit, handleChange, handleBlur, values }) => (
+        <Box>
+          <Form onSubmit={handleSubmit} className={style.container}>
+            <img src={images} className={style.container__images} alt="logo" />
+            <Box className={style.login}>
+              <p className={style.login__title}>Logowanie do systemu</p>
+              <Field name={"Login"}>
+                {({ field, meta }) => (
+                  <Box>
+                    <input
+                      className={style.login__input}
+                      type="text"
+                      placeholder="Login"
+                      {...field}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.Login}
+                    />
+                    {meta.touched && meta.error && (
+                      <Box className={style.error}>{meta.error}</Box>
+                    )}
+                  </Box>
+                )}
+              </Field>
+              <Field name={"Password"}>
+                {({ field, meta }) => (
+                  <Box>
+                    <input
+                      className={style.login__input}
+                      type="Password"
+                      placeholder="Password"
+                      {...field}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.Password}
+                    />
+                    {meta.touched && meta.error && (
+                      <Box className={style.error}>{meta.error}</Box>
+                    )}
+                  </Box>
+                )}
+              </Field>
+              {errorForm}
+              <button type="submit" className={style.login__btn}>
+                Zaloguj
+              </button>
+            </Box>
+          </Form>
+        </Box>
+      )}
+    </Formik>
   );
 };
 

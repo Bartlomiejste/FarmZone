@@ -3,6 +3,7 @@ import styleAnalysis from "../Analysis/Analysis.module.css";
 import { useState } from "react";
 import { supabase } from "../../../supabase/config";
 import { useEffect } from "react";
+import { Box, Typography } from "@mui/material";
 
 const Crops = () => {
   const [crops, setCrops] = useState([]);
@@ -40,10 +41,12 @@ const Crops = () => {
   };
 
   return (
-    <div>
+    <Box>
       <form onSubmit={createCrops} className={styleAnalysis.form}>
-        <p className={styleAnalysis.title}>Zebrane plony</p>
-        <div>
+        <Typography variant="p" className={styleAnalysis.title}>
+          Zebrane plony
+        </Typography>
+        <Box>
           <label htmlFor="kindofcrops">Rodzaj plonu</label>
           <input
             type="text"
@@ -52,8 +55,8 @@ const Crops = () => {
             className={styleAnalysis.input}
             required
           />
-        </div>
-        <div>
+        </Box>
+        <Box>
           <label htmlFor="quantitycrops">
             Ilość zebranego plonu (w tonach)
           </label>
@@ -64,8 +67,8 @@ const Crops = () => {
             className={styleAnalysis.input}
             required
           />
-        </div>
-        <div>
+        </Box>
+        <Box>
           <label htmlFor="pricecrops">Cena za tonę (zł)</label>
           <input
             type="number"
@@ -74,10 +77,10 @@ const Crops = () => {
             className={styleAnalysis.input}
             required
           />
-        </div>
+        </Box>
         <button className={styleAnalysis.btn}>Dodaj plony</button>
       </form>
-    </div>
+    </Box>
   );
 };
 

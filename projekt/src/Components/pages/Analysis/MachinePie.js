@@ -4,6 +4,7 @@ import { supabase } from "../../../supabase/config";
 import styleAnalysis from "../Analysis/Analysis.module.css";
 import { Chart as ChartJs, Tooltip, Title, ArcElement, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+import { Box } from "@mui/material";
 
 ChartJs.register(Tooltip, Title, ArcElement, Legend);
 
@@ -65,14 +66,12 @@ const MachinePie = () => {
     }
   };
   return (
-    <>
-      <div
-        className={styleAnalysis.analysis__pie}
-        style={{ width: "20%", height: "20%" }}
-      >
-        <Doughnut data={machine} />
-      </div>
-    </>
+    <Box
+      className={styleAnalysis.analysis__pie}
+      style={{ width: "20%", height: "20%" }}
+    >
+      <Doughnut data={machine} />
+    </Box>
   );
 };
 

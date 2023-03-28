@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import stylePlanning from "../Planning/Planning.module.css";
 import { supabase } from "../../../supabase/config";
+import { Box } from "@mui/material";
 
 const Working = () => {
   const [typeofwork, setTypeOfWork] = useState();
   const [scheduledstartdate, setScheduledStartDate] = useState();
   const [numberoffield, setNumberOfField] = useState();
-  const [work, setWork] = useState([]);
 
   const createWork = async (e) => {
     e.preventDefault();
@@ -18,16 +18,15 @@ const Working = () => {
     }
     console.log(error);
     if (data) {
-      setWork(data);
-      console.log(data);
+      return data;
     }
     window.location.reload();
   };
   return (
     <>
       <form onSubmit={createWork} className={stylePlanning.overview__form}>
-        <div className={stylePlanning.overview__title}>Planowanie prac</div>
-        <div>
+        <Box className={stylePlanning.overview__title}>Planowanie prac</Box>
+        <Box>
           <label htmlFor="scheduledstartdate">Data planowanej pracy: </label>
           <input
             type="date"
@@ -35,8 +34,8 @@ const Working = () => {
             className={stylePlanning.overview__input}
             required
           />
-        </div>
-        <div>
+        </Box>
+        <Box>
           <label htmlFor="typeofwork">Rodzaj pracy: </label>
           <input
             type="text"
@@ -45,8 +44,8 @@ const Working = () => {
             className={stylePlanning.overview__input}
             required
           />
-        </div>
-        <div>
+        </Box>
+        <Box>
           <label htmlFor="numberoffield">Nr działki: </label>
           <input
             type="text"
@@ -55,7 +54,7 @@ const Working = () => {
             className={stylePlanning.overview__input}
             required
           />
-        </div>
+        </Box>
         <button className={stylePlanning.overview__btn}>Dodaj prace</button>
       </form>
     </>

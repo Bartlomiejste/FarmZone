@@ -1,3 +1,4 @@
+import { Box, Button, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import style from "../ErrorBoundary/Error.module.css";
 
@@ -18,13 +19,17 @@ export const DelayedFallback = () => {
   return (
     <>
       {show && (
-        <div className={style.error}>
-          <h3 className={style.error__title}>Ups! Coś poszło nie tak...</h3>
-          <p className={style.error__info}>Odśwież lub wróć na stronę główną</p>
+        <Box className={style.error}>
+          <Typography variant="h3" className={style.error__title}>
+            Ups! Coś poszło nie tak...
+          </Typography>
+          <Typography className={style.error__info}>
+            Odśwież lub wróć na stronę główną
+          </Typography>
           <button onClick={refreshPage} className={style.error__btn}>
             Odśwież
           </button>
-        </div>
+        </Box>
       )}
     </>
   );
