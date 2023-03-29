@@ -74,87 +74,85 @@ const WorkingTable = () => {
   };
 
   return (
-    <>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell
-                align="left"
-                style={{
-                  fontWeight: "bold",
-                  background: isDarkTheme ? "#000" : "#4caf4faf",
-                  color: isDarkTheme ? "#ffff" : "#000",
-                }}
-              >
-                {checkedAll ? (
-                  <DeleteIcon
-                    className={stylePlanning.deleteIcon}
-                    onClick={deleteAllSelected}
-                  />
-                ) : null}
-              </TableCell>
-
-              <TableCell
-                align="center"
-                style={{
-                  fontWeight: "bold",
-                  background: isDarkTheme ? "#000" : "#4caf4faf",
-                  color: isDarkTheme ? "#ffff" : "#000",
-                }}
-              >
-                Rodzaj pracy
-              </TableCell>
-              <TableCell
-                align="center"
-                style={{
-                  fontWeight: "bold",
-                  background: isDarkTheme ? "#000" : "#4caf4faf",
-                  color: isDarkTheme ? "#ffff" : "#000",
-                }}
-              >
-                Nr działki
-              </TableCell>
-              <TableCell
-                align="center"
-                style={{
-                  fontWeight: "bold",
-                  background: isDarkTheme ? "#000" : "#4caf4faf",
-                  color: isDarkTheme ? "#ffff" : "#000",
-                }}
-              >
-                Data planowanej pracy
-              </TableCell>
-              <TableCell
-                align="center"
-                style={{
-                  fontWeight: "bold",
-                  background: isDarkTheme ? "#000" : "#4caf4faf",
-                  color: isDarkTheme ? "#ffff" : "#000",
-                }}
-              >
-                <input
-                  name="inputAll"
-                  type="checkbox"
-                  onChange={(event) => selectAll(event.target.checked)}
-                  checked={checkedAll}
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell
+              align="left"
+              style={{
+                fontWeight: "bold",
+                background: isDarkTheme ? "#000" : "#4caf4faf",
+                color: isDarkTheme ? "#ffff" : "#000",
+              }}
+            >
+              {checkedAll ? (
+                <DeleteIcon
+                  className={stylePlanning.deleteIcon}
+                  onClick={deleteAllSelected}
                 />
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {work.map((row) => (
-              <WorkRow
-                checkedAll={checkedAll}
-                deleteServis={deleteServis}
-                rowData={row}
-                key={row.id}
+              ) : null}
+            </TableCell>
+
+            <TableCell
+              align="center"
+              style={{
+                fontWeight: "bold",
+                background: isDarkTheme ? "#000" : "#4caf4faf",
+                color: isDarkTheme ? "#ffff" : "#000",
+              }}
+            >
+              Rodzaj pracy
+            </TableCell>
+            <TableCell
+              align="center"
+              style={{
+                fontWeight: "bold",
+                background: isDarkTheme ? "#000" : "#4caf4faf",
+                color: isDarkTheme ? "#ffff" : "#000",
+              }}
+            >
+              Nr działki
+            </TableCell>
+            <TableCell
+              align="center"
+              style={{
+                fontWeight: "bold",
+                background: isDarkTheme ? "#000" : "#4caf4faf",
+                color: isDarkTheme ? "#ffff" : "#000",
+              }}
+            >
+              Data planowanej pracy
+            </TableCell>
+            <TableCell
+              align="center"
+              style={{
+                fontWeight: "bold",
+                background: isDarkTheme ? "#000" : "#4caf4faf",
+                color: isDarkTheme ? "#ffff" : "#000",
+              }}
+            >
+              <input
+                name="inputAll"
+                type="checkbox"
+                onChange={(event) => selectAll(event.target.checked)}
+                checked={checkedAll}
               />
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </>
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {work.map((row) => (
+            <WorkRow
+              checkedAll={checkedAll}
+              deleteServis={deleteServis}
+              rowData={row}
+              key={row.id}
+            />
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 

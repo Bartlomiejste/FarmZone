@@ -5,7 +5,6 @@ import { useContext } from "react";
 import { AppContext } from "../../AppContext/AppContext";
 import { Suspense } from "react";
 import { DelayedFallback } from "../../ErrorBoundary/DelayedFallback";
-
 import HomeIcon from "@mui/icons-material/Home";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import ThermostatIcon from "@mui/icons-material/Thermostat";

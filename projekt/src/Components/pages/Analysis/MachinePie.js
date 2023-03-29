@@ -19,8 +19,6 @@ const MachinePie = () => {
     labels: "",
   });
 
-  const [errors, setFormError] = useState();
-
   useEffect(() => {
     getMachines();
   }, []);
@@ -28,12 +26,10 @@ const MachinePie = () => {
   const getMachines = async () => {
     let { data: Machine, error } = await supabase.from("Machine").select("*");
     if (error) {
-      setFormError(null);
-      console.log(error);
+      return error;
     }
     if (Machine) {
       let name = Machine.map((name) => name.Category);
-      const id = [];
       let one = [];
       let sumTotal = 0;
 
@@ -62,7 +58,6 @@ const MachinePie = () => {
         ],
         labels: name,
       });
-      setFormError(null);
     }
   };
   return (

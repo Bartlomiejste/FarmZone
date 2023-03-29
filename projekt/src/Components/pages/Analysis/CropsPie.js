@@ -18,15 +18,11 @@ const CropsPie = () => {
     ],
     labels: "",
   });
-  const [nameCrops, setNameCrops] = useState([]);
-  const [errors, setFormError] = useState();
 
   const getName = async () => {
-    let { data: Crops, error } = await supabase
-      .from("Crops")
-      .select("kindofcrops");
+    let { data: Crops } = await supabase.from("Crops").select("kindofcrops");
     if (Crops) {
-      setNameCrops(Crops);
+      return Crops;
     }
   };
   useEffect(() => {
@@ -37,11 +33,10 @@ const CropsPie = () => {
   const getCrops = async () => {
     let { data: Crops, error } = await supabase.from("Crops").select("*");
     if (error) {
-      setFormError(null);
+      return error;
     }
 
     if (Crops) {
-      const id = [];
       let name = [...new Set(Crops.map((name) => name.kindofcrops))];
 
       const sumTotal = Crops.reduce((acc, cur) => {
@@ -84,7 +79,6 @@ const CropsPie = () => {
         ],
         labels: name,
       });
-      setFormError(null);
     }
   };
   return (

@@ -21,7 +21,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import stylePlanning from "../Planning/Planning.module.css";
 import ServisRow from "./ServisRow";
 import WorkingTable from "./WorkingTable";
-import { Box, Input } from "@mui/material";
+import { Box } from "@mui/material";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -131,7 +131,7 @@ export default function CustomizedAccordions() {
           <Typography>Przeglądy</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
+          <Box>
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
@@ -190,7 +190,7 @@ export default function CustomizedAccordions() {
                         color: isDarkTheme ? "#ffff" : "#000",
                       }}
                     >
-                      <Input
+                      <input
                         name="inputAll"
                         type="checkbox"
                         onChange={(event) => selectAll(event.target.checked)}
@@ -211,7 +211,7 @@ export default function CustomizedAccordions() {
                 </TableBody>
               </Table>
             </TableContainer>
-          </Typography>
+          </Box>
         </AccordionDetails>
       </Accordion>
       <Accordion
@@ -222,9 +222,7 @@ export default function CustomizedAccordions() {
           <Typography>Prace</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            <WorkingTable />
-          </Typography>
+          <WorkingTable />
         </AccordionDetails>
       </Accordion>
     </>

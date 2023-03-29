@@ -19,7 +19,6 @@ import { Box } from "@mui/material";
 export default function Home() {
   const { isDarkTheme } = useContext(AppContext);
   const [rowname, setRowName] = useState([]);
-  const [formError, setFormError] = useState(null);
   const [damage, setDamage] = useState([]);
   const [crops, setCrops] = useState([]);
 
@@ -32,12 +31,10 @@ export default function Home() {
   const getMachines = async () => {
     let { data: Machine, error } = await supabase.from("Machine").select("*");
     if (error) {
-      setFormError(null);
       console.log(error);
     }
     if (Machine) {
       setRowName(Machine);
-      setFormError(null);
     }
   };
 

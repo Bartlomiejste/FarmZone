@@ -15,8 +15,9 @@ const Documents = () => {
         .from("images")
         .upload(file.name, file);
       if (data) {
-        const { data: imageLink, error: imageLinkError } =
-          await supabase.storage.from("images").getPublicUrl(data.path);
+        const { data: imageLink } = await supabase.storage
+          .from("images")
+          .getPublicUrl(data.path);
         const { data: insertData, error: errorTable } = await supabase
           .from("files")
           .insert([

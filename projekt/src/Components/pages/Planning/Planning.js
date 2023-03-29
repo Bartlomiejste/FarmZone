@@ -27,54 +27,52 @@ const Planning = () => {
   };
 
   return (
-    <>
-      <Layout>
-        <Box className={stylePlanning.planning__section}>
-          <Box className={stylePlanning.overview}>
-            <form
-              onSubmit={createServis}
-              className={stylePlanning.overview__form}
-            >
-              <Box className={stylePlanning.overview__title}>Przeglądy</Box>
-              <Box>
-                <label htmlFor="date">Data przeglądu: </label>
-                <input
-                  type="date"
-                  onChange={(e) => setDate(e.target.value)}
-                  className={stylePlanning.overview__input}
-                  required
-                />
-              </Box>
-              <Box>
-                <label htmlFor="vehicleName">Nazwa pojazdu: </label>
-                <input
-                  required
-                  type="text"
-                  value={vehicleName}
-                  onChange={(e) => setVehicleName(e.target.value)}
-                  className={stylePlanning.overview__input}
-                />
-              </Box>
-              <Box>
-                <label htmlFor="registrationNumber">Nr rejestracyjny: </label>
-                <input
-                  required
-                  type="text"
-                  value={registrationNumber}
-                  onChange={(e) => setRegistrationNumber(e.target.value)}
-                  className={stylePlanning.overview__input}
-                />
-              </Box>
-              <button className={stylePlanning.overview__btn}>
-                Dodaj przegląd
-              </button>
-            </form>
-            <Working />
-          </Box>
-          <AccordingServis />
+    <Layout>
+      <Box className={stylePlanning.planning__section}>
+        <Box className={stylePlanning.overview}>
+          <form
+            onSubmit={createServis}
+            className={stylePlanning.overview__form}
+          >
+            <Box className={stylePlanning.overview__title}>Przeglądy</Box>
+            <Box>
+              <label htmlFor="date">Data przeglądu: </label>
+              <input
+                type="date"
+                onChange={(e) => setDate(e.target.value)}
+                className={stylePlanning.overview__input}
+                required
+              />
+            </Box>
+            <Box>
+              <label htmlFor="vehicleName">Nazwa pojazdu: </label>
+              <input
+                required
+                type="text"
+                value={vehicleName}
+                onChange={(e) => setVehicleName(e.target.value)}
+                className={stylePlanning.overview__input}
+              />
+            </Box>
+            <Box>
+              <label htmlFor="registrationNumber">Nr rejestracyjny: </label>
+              <input
+                required
+                type="text"
+                value={registrationNumber}
+                onChange={(e) => setRegistrationNumber(e.target.value)}
+                className={stylePlanning.overview__input}
+              />
+            </Box>
+            <button className={stylePlanning.overview__btn}>
+              Dodaj przegląd
+            </button>
+          </form>
+          <Working />
         </Box>
-      </Layout>
-    </>
+        <AccordingServis />
+      </Box>
+    </Layout>
   );
 };
 

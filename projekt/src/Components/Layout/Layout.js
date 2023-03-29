@@ -8,8 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 
 export const Layout = ({ children }) => {
-  const { visible } = useContext(AppContext);
-  const { isUserLogged } = useContext(AppContext);
+  const { visible, isUserLogged } = useContext(AppContext);
 
   const navigate = useNavigate();
 

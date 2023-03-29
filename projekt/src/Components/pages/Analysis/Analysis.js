@@ -9,6 +9,7 @@ import CropsTable from "./CropsTable";
 import CropsPie from "./CropsPie";
 import MachinePie from "./MachinePie";
 import { Box } from "@mui/material";
+
 ChartJs.register(Tooltip, Title, ArcElement, Legend);
 
 const Analysis = () => {

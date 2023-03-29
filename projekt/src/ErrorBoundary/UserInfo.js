@@ -3,7 +3,6 @@ import { AppContext } from "../AppContext.js/AppContext";
 import { Suspense } from "react";
 import React from "react";
 import { DelayedFallback } from "./DelayedFallback";
-import { Typography } from "@mui/material";
 
 export const UserInfo = () => {
   const { isUserLogged } = useContext(AppContext);
@@ -11,9 +10,9 @@ export const UserInfo = () => {
   return (
     <Suspense
       fallback={
-        <Typography>
+        <Box>
           <DelayedFallback />
-        </Typography>
+        </Box>
       }
     >
       {isUserLogged ? (

@@ -39,9 +39,9 @@ const Failures = () => {
     }
   };
 
-  let additionalDamage = 0;
   damage.forEach(functionDamage);
   function functionDamage(cost) {
+    let additionalDamage = 0;
     additionalDamage += cost.cost;
   }
 

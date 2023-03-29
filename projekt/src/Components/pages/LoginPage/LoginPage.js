@@ -19,9 +19,7 @@ export function FormField({ name, errors, touched, value }) {
   );
 }
 
-export const LoginPage = (props) => {
-  const [userLogin, setUserLogin] = useState([]);
-
+export const LoginPage = () => {
   const [errorForm, setErrorForm] = useState(null);
 
   const { isUserLogged, login } = useContext(AppContext);
@@ -35,8 +33,7 @@ export const LoginPage = (props) => {
       console.log(error);
     }
     if (User) {
-      setUserLogin(User);
-      setErrorForm(null);
+      return User;
     }
     return User;
   };

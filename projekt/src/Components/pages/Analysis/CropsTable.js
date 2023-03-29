@@ -32,7 +32,7 @@ const CropsTable = () => {
     getCrops();
   }, []);
 
-  const getCrops = async (e) => {
+  const getCrops = async () => {
     let { data: Crops, error } = await supabase
       .from("Crops")
       .select(kindofcrops, quantitycrops, pricecrops);
@@ -44,7 +44,7 @@ const CropsTable = () => {
     }
   };
 
-  const deleteAllSelected = async (id) => {
+  const deleteAllSelected = async () => {
     const { data: Crops, error } = await supabase
       .from("Crops")
       .delete()
@@ -62,12 +62,8 @@ const CropsTable = () => {
   };
 
   const deleteCrops = async (id) => {
-    const { data: Crops, error } = await supabase
-      .from("Crops")
-      .delete()
-      .eq("id", id);
+    const { error } = await supabase.from("Crops").delete().eq("id", id);
     if (error) throw error;
-
     if (getCrops) {
     }
     getCrops();

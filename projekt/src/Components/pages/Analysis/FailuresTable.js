@@ -19,7 +19,6 @@ const FailuresTable = () => {
   const { isDarkTheme } = useContext(AppContext);
 
   const [damage, setDamage] = useState([]);
-
   const [checkedAll, setCheckedAll] = useState(false);
   const [cost, setCost] = useState();
   const [damageelement, setDamageElement] = useState();
@@ -32,7 +31,7 @@ const FailuresTable = () => {
     getDamage();
   }, []);
 
-  const getDamage = async (e) => {
+  const getDamage = async () => {
     let { data: Damage, error } = await supabase
       .from("Damage")
       .select(cost, damageelement);
@@ -44,7 +43,7 @@ const FailuresTable = () => {
     }
   };
 
-  const deleteAllSelected = async (id) => {
+  const deleteAllSelected = async () => {
     const { data: Damage, error } = await supabase
       .from("Damage")
       .delete()
@@ -62,10 +61,7 @@ const FailuresTable = () => {
   };
 
   const deleteDamage = async (id) => {
-    const { data: Damage, error } = await supabase
-      .from("Damage")
-      .delete()
-      .eq("id", id);
+    const { error } = await supabase.from("Damage").delete().eq("id", id);
     if (error) throw error;
 
     if (getDamage) {

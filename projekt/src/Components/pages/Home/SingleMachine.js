@@ -19,7 +19,7 @@ export const SingleMachine = ({ machine, getMachines }) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const updateMachine = async (id) => {
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("Machine")
       .update({
         Category,

@@ -8,8 +8,7 @@ import Clock from "./Clock/Clock";
 import { Box, Typography } from "@mui/material";
 
 const Header = () => {
-  const { set } = useContext(AppContext);
-  const { isDarkTheme } = useContext(AppContext);
+  const { set, isDarkTheme } = useContext(AppContext);
 
   const pathname = window.location.pathname;
 

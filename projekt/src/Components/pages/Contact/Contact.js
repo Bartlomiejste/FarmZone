@@ -22,8 +22,6 @@ export function FormField({ name, errors, touched, value }) {
 }
 
 const Contact = () => {
-  const [contacts, setContacts] = useState("");
-
   const { isDarkTheme } = useContext(AppContext);
 
   const linkedinUrl = "https://www.linkedin.com/in/stepien-bartlomiej";
@@ -70,7 +68,7 @@ const Contact = () => {
         console.log(error);
 
         if (Contact) {
-          setContacts(Contact);
+          return Contact;
         }
         resetForm(initialValues);
       }}

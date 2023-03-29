@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 
 const Crops = () => {
-  const [crops, setCrops] = useState([]);
   const [kindofcrops, setKindOfCrops] = useState();
   const [quantitycrops, setQuantityCrops] = useState();
   const [pricecrops, setPriceCrops] = useState();
@@ -25,7 +24,7 @@ const Crops = () => {
     }
     console.log(error);
     if (data) {
-      setCrops(data);
+      return data;
     }
     window.location.reload();
   };
@@ -36,7 +35,7 @@ const Crops = () => {
       console.log(error);
     }
     if (Crops) {
-      setCrops(Crops);
+      return Crops;
     }
   };
 

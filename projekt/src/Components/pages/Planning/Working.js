@@ -23,41 +23,39 @@ const Working = () => {
     window.location.reload();
   };
   return (
-    <>
-      <form onSubmit={createWork} className={stylePlanning.overview__form}>
-        <Box className={stylePlanning.overview__title}>Planowanie prac</Box>
-        <Box>
-          <label htmlFor="scheduledstartdate">Data planowanej pracy: </label>
-          <input
-            type="date"
-            onChange={(e) => setScheduledStartDate(e.target.value)}
-            className={stylePlanning.overview__input}
-            required
-          />
-        </Box>
-        <Box>
-          <label htmlFor="typeofwork">Rodzaj pracy: </label>
-          <input
-            type="text"
-            value={typeofwork}
-            onChange={(e) => setTypeOfWork(e.target.value)}
-            className={stylePlanning.overview__input}
-            required
-          />
-        </Box>
-        <Box>
-          <label htmlFor="numberoffield">Nr działki: </label>
-          <input
-            type="text"
-            value={numberoffield}
-            onChange={(e) => setNumberOfField(e.target.value)}
-            className={stylePlanning.overview__input}
-            required
-          />
-        </Box>
-        <button className={stylePlanning.overview__btn}>Dodaj prace</button>
-      </form>
-    </>
+    <form onSubmit={createWork} className={stylePlanning.overview__form}>
+      <Box className={stylePlanning.overview__title}>Planowanie prac</Box>
+      <Box>
+        <label htmlFor="scheduledstartdate">Data planowanej pracy: </label>
+        <input
+          type="date"
+          onChange={(e) => setScheduledStartDate(e.target.value)}
+          className={stylePlanning.overview__input}
+          required
+        />
+      </Box>
+      <Box>
+        <label htmlFor="typeofwork">Rodzaj pracy: </label>
+        <input
+          type="text"
+          value={typeofwork}
+          onChange={(e) => setTypeOfWork(e.target.value)}
+          className={stylePlanning.overview__input}
+          required
+        />
+      </Box>
+      <Box>
+        <label htmlFor="numberoffield">Nr działki: </label>
+        <input
+          type="text"
+          value={numberoffield}
+          onChange={(e) => setNumberOfField(e.target.value)}
+          className={stylePlanning.overview__input}
+          required
+        />
+      </Box>
+      <button className={stylePlanning.overview__btn}>Dodaj prace</button>
+    </form>
   );
 };
 

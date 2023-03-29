@@ -18,12 +18,9 @@ const AddMachine = () => {
     const { data, error } = await supabase
       .from("Machine")
       .insert([{ Category, Name, Damage, Condition, Price }]);
-
     if (error) {
-      throw error;
+      return error;
     }
-    console.log(error);
-
     if (data) {
       setMachines(data);
       setFormError(null);

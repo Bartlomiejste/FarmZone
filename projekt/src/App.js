@@ -18,19 +18,12 @@ function App() {
         <AppContextProvider>
           <Routes>
             <Route path="/" element={<LoginPage />} />
-
             <Route path="/pulpit" element={<Main />} />
-
             <Route path="/analiza" element={<Analysis />} />
-
             <Route path="/pogoda" element={<Map />} />
-
             <Route path="/planowanie" element={<Planning />} />
-
             <Route path="/informacje" element={<Information />} />
-
             <Route path="/dokumenty" element={<Documents />} />
-
             <Route path="/kontakt" element={<Contact />} />
           </Routes>
         </AppContextProvider>
